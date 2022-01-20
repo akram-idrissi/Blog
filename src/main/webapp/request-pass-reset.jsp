@@ -1,0 +1,20 @@
+<jsp:include page="includes/startHtml.jsp" />
+<jsp:include page="includes/header.jsp" />
+<jsp:include page="includes/sideBar.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+    <div class="container">
+        <div class="reset-pass-request">
+            <div class="padding">
+                <h2>Reset Password</h2>
+                <hr>
+                <form action="email" method="post">
+                    <label>Email*</label><br>
+                    <input type="email" name="email" placeholder=" "><br>
+                    <input type="submit" value="Request Password Reset">
+                </form>
+            </div>
+        </div>
+    </div>
+
+<jsp:include page="includes/endHtml.jsp" />

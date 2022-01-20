@@ -1,0 +1,140 @@
+
+package ma.data;
+
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+
+import ma.util.DBUtil;
+import ma.business.User;
+import ma.util.ConnectionPool;
+
+
+public class UserDB {
+
+    public static long insert(User user){
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        String query = "insert into user (username, email, hashedpass, salt, valide, image)"
+                + " values(?, ?, ?, ?, ?, ?)";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getHashedpass());
+            ps.setString(4, user.getSalt());
+            ps.setInt(5, user.getValide());
+            ps.setString(6, user.getImage());
+            return ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+            
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        
+        
+    } 
+    
+    public static long update(User user){
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        String query = "update user set username = ?,"
+                + " email = ?,"
+                + " hashedpass = ?,"
+                + " salt = ?,"
+                + " valide = ?,"
+                + " image = ?"
+                + " where id = ? ";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getHashedpass());
+            ps.setString(4, user.getSalt());
+            ps.setInt(5, user.getValide());
+            ps.setString(6, user.getImage());
+            ps.setInt(7, user.getId());
+            return ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+            
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        
+        
+    } 
+    
+    public static long delete(User user){
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        String query = "delete from user where id = ?";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, user.getId());
+            return ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+            
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        
+    } 
+    
+    public static User getUser(String query){
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return new User(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getString(8)
+                    );
+            } else{
+                return null;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally{
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+}

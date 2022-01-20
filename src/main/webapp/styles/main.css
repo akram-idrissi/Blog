@@ -1,0 +1,793 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #faf9fa;
+}
+
+.container{
+    width: 63%;
+    margin: auto;
+}
+
+.padding{
+    padding: 20px;
+    position: relative;
+}
+
+.hide{
+    display: none;
+}
+
+.comments-link{
+    color: #007bff;
+    font-size: 12px;
+}
+
+.about-title{
+    margin-top: 20px;
+}
+
+hr{
+    border: 0.5px solid #efeeef;
+}
+
+h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+a{
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.insights{
+    float: right;
+    margin-top: 11px;
+}
+
+.insights span{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+.insights a{
+    padding-left: 1px;
+    text-decoration: none;
+}
+
+.insights .like{
+    color: #198754;
+}
+
+.insights .dislike{
+    color: #dc3545;
+}
+
+.insights .comment{
+    color: #a4a5a8;
+}
+
+input[type=text]{
+    width: 100%;
+    height: 30px;
+
+    margin-top: 5px;
+    padding-left: 15px; 
+    margin-bottom: 20px;
+
+    border-radius: 5px;
+    border: 0.5px solid #e9e8e9;
+}
+
+input[type=text]:focus{
+    padding-left: 15px; 
+    border-color: #cce5ff;
+
+    outline: 0 none;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) , 0 0 8px #cce5ff;
+}
+
+input[type=email]{
+    width: 100%;
+    height: 30px;
+
+    margin-top: 5px;
+    padding-left: 15px; 
+    margin-bottom: 20px;
+
+    border-radius: 5px;
+    border: 0.5px solid #e9e8e9;
+}
+
+input[type=email]:focus{
+    padding-left: 15px; 
+    border-color: #cce5ff;
+
+    outline: 0 none;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) , 0 0 8px #cce5ff;
+}
+
+input[type=submit]{
+    color: #17a2b8;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 0.5px solid #17a2b8;
+    background-color: transparent;
+
+    transition: 0.3s;
+}
+
+input[type=submit]:hover{
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+input[type=password]{
+    width: 100%;
+    height: 30px;
+
+    margin-top: 5px;
+    padding-left: 15px; 
+    margin-bottom: 20px;
+
+    border-radius: 5px;
+    border: 0.5px solid #e9e8e9;
+}
+
+input[type=password]:focus{
+    padding-left: 15px; 
+    border-color: #cce5ff;
+
+    outline: 0 none;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) , 0 0 8px #cce5ff;
+}
+
+textArea{
+    resize: none;
+    margin-top: 5px;
+    padding-top: 10px;
+    border-radius: 5px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    border: 0.5px solid #e9e8e9;
+}
+
+textArea:focus{
+    outline: 0 none;
+    border-radius: 5px;
+    border-color: #cce5ff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) , 0 0 8px #cce5ff;
+}
+
+.read-more-btn{
+    color: #17a2b8;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 0.5px solid #17a2b8;
+    background-color: transparent;
+    
+    transition: 0.3s;
+}
+
+.read-more-btn:hover{
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+
+/* start header */
+.header{
+    background-color: #556e80;
+}
+
+.header-links{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-links a{
+    color: #7c919e;
+    padding-left: 10px;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.header-links a:hover{
+    color: #eee;
+}
+
+.header-links span{
+    cursor: pointer;
+    font-size: 20px;
+    color: #b5bbc0;
+    padding-right: 10px;
+}
+/* end header */
+
+
+/* start side bar */
+.side-bar{
+    width: 266px;
+    float: right;
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1.5px solid #efeeef;
+}
+
+.side-bar p{
+    margin: 5px 0;
+    font-size: 12px;
+    color: #a4a5a8;
+}
+
+.side-bar ul{
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+.side-bar ul li{
+    font-size: 14px;
+    text-align: left;
+    color: #a4a5a8;
+    padding: 10px 20px;
+    background-color: #fcfcfc;
+    border: 0.5px solid #f1f1f1;
+}
+/* end side bar */
+
+
+/* start post page */
+.post{
+    width: 550px;
+    margin: 20px 0;
+    list-style-type: none;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.post-content{
+    display: flex;
+}
+
+.post-desc{
+    width: 100%;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.post-date{
+    font-size: 12px;
+    color: #a4a5a8;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.username{
+    font-size: 20px;
+    color: #007bff;
+}
+
+.post-desc hr{
+    margin: 3px 0 7px 0;
+}
+
+.post-desc a:hover{
+    text-decoration: none;
+}
+
+.post-title{
+    transition: 0.3s;
+}
+
+.post-title:hover{
+    color: #007bff;
+}
+
+.content{
+    text-align: justify;
+    margin: 5px 0 10px 0;
+}
+/* end post page */
+
+
+/* start profile page */
+.profile{
+    width: 550px;
+    margin: 20px 0;
+    list-style-type: none;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.profile-user-info{
+    display: flex;
+}
+
+.profile-user-info .user-data{
+    margin-left: 10px;
+}
+
+.user-data p:nth-child(1){
+    font-size: 36px;
+    color: #484748;
+    font-weight: 500; 
+}
+
+.user-data p:nth-child(2){
+    margin-top: 7px;
+    font-size: 15px;
+    color: #86898d;
+    font-weight: 500; 
+}
+
+.profile-user-info img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile h2{
+    margin-top: 10px;
+    color: #484748;
+}
+
+.profile hr{
+    margin: 3px 0 20px 0;
+    border: 0.5px solid #efeeef;
+}
+
+.profile .username-rules{
+    display: block;
+    font-size: 12px;
+    color: #aaabae;
+    margin-top: -15px;
+}
+
+.image-info{
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.change-img-button{
+    display: block;
+    margin-top: 5px;
+}
+
+#img-path{
+    color: #17a2b8;
+}
+/* end profile page */
+
+
+/* start log in page */
+.login{
+    width: 550px;
+    margin: 20px 0 10px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.login h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.login hr{
+    margin: 3px 0 20px 0;
+    border: 0.5px solid #efeeef;
+}
+
+.login a{
+    font-size: 12px;
+    color: #007bff;
+    margin-left: 5px;
+    text-decoration: none;
+
+}
+
+.login a:hover{
+    text-decoration: underline;
+}
+
+.sigin{
+    width: 550px;
+}
+
+.sigin hr{
+    margin-bottom: 10px;
+    border: 0.5px solid #efeeef;
+}
+
+.sigin span{
+    font-size: 12px;
+    color: #a4a5a8;
+    margin-right: 3px;
+}
+
+.sigin a{
+    font-size: 12px;
+    color: #007bff;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.sigin a:hover{
+    text-decoration: underline;
+}
+/* end log in page */
+
+
+/* start register page */
+.register{
+    width: 550px;
+    margin: 20px 0 10px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.register h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.register hr{
+    margin: 3px 0 20px 0;
+    border: 0.5px solid #efeeef;
+}
+
+.register a{
+    font-size: 12px;
+    color: #007bff;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.register a:hover{
+    text-decoration: underline;
+}
+
+.register ul{
+    margin: -10px 0 20px 40px;    
+}
+
+.register ul li{
+    padding: 2px;
+    font-size: 11px;
+    color: #aaabae;
+}
+
+.confirm-pass-message{
+    display: block;
+    font-size: 12px;
+    color: #aaabae;
+    margin-top: -15px;
+}
+
+.signup{
+    width: 550px;
+}
+
+.signup hr{
+    margin-bottom: 10px;
+    border: 0.5px solid #efeeef;
+}
+
+.signup span{
+    font-size: 12px;
+    color: #a4a5a8;
+    margin-right: 3px;
+}
+
+.signup a{
+    font-size: 12px;
+    color: #007bff;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.signup a:hover{
+    text-decoration: underline;
+}
+/* end register page */
+
+
+/* start add post page */
+.new-post{
+    width: 550px;
+    margin: 20px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.new-post h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.new-post hr{
+    border: 0.5px solid #efeeef;
+}
+/* end add post page */
+
+
+/* start update post page */
+.update-post{
+    width: 550px;
+    margin: 20px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.update-post h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.update-post hr{
+    border: 0.5px solid #efeeef;
+}
+/* end update post page */
+
+
+/* start delete post page */
+.delete-post{
+    width: 550px;
+    margin: 20px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.delete-post h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.delete-post hr{
+    border: 0.5px solid #efeeef;
+}
+
+.delete-post h2:nth-of-type(2){
+    color: #000;
+}
+
+.confirmation-buttons{
+    margin-top: 20px;
+}
+
+.confirmation-buttons button:nth-of-type(1){
+    color: #FF0000;
+    margin-right: 5px;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 0.5px solid #FF0000;
+    background-color: transparent;
+
+    transition: 0.3s;
+}
+
+.confirmation-buttons button:nth-of-type(1):hover{
+    color: #fff;
+    background-color: #FF0000;
+}
+
+.confirmation-buttons button:nth-of-type(2){
+    color: #6c757d;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 0.5px solid #6c757d;
+    background-color: transparent;
+
+    transition: 0.3s;
+}
+
+.confirmation-buttons button:nth-of-type(2):hover{
+    color: #fff;
+    background-color: #6c757d;
+}
+/* end delete post page */
+
+
+/* start user post page */
+#update-post-btn{
+    margin: 0px;
+    width: 70px;
+    height: 30px;
+    margin: 5px 0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #6c757d;
+    border: 0.5px solid #6c757d;
+
+    transition: 0.3s;
+}
+
+#delete-post-btn{
+    margin: 0px;
+    width: 70px;
+    height: 30px;
+    margin: 5px 0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #FF0000;
+    border: 0.5px solid #FF0000;
+
+    transition: 0.3s;
+}
+
+#update-post-btn:hover, #delete-post-btn:hover{
+    color: #000;
+    font-weight: bold;
+}
+/* end user post page */
+
+
+/* start comment page */
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.comments{
+    width: 550px;
+    margin-top: 20px;
+}
+
+.comment-page{
+    width: 550px;
+    margin: 20px 0;
+    list-style: none;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.comment-page .padding{
+    position: relative;
+}
+
+.comment-page .insights{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.user-info{
+    margin-top: -53px;
+    margin-left: 60px;
+}
+
+.user-info p{
+    text-align: justify;
+}
+
+.meta{
+    margin: 0;
+}
+
+.meta a{
+    color: #007bff;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.meta a:hover{
+    text-decoration: underline;
+}
+
+.comment-body .content{
+    margin: 10px 0;
+}
+
+.break-line{
+    margin: 10px 0; 
+    border: 0.5px solid #efeeef;
+}
+/* end comment page */
+
+
+/* start logout page */
+.logout{
+    width: 550px;
+    margin: 20px 0;
+}
+
+.logout hr{
+    margin: 3px 0 10px 0;
+    border: 0.5px solid #efeeef;
+}
+
+.logout h2{
+    color: #484748;
+}
+
+.logout a{
+    font-size: 12px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.logout a:hover{
+    text-decoration: underline;
+}
+/* end logout page */
+
+
+/* start request pass reset page */
+.reset-pass-request{
+    width: 550px;
+    margin: 20px 0 10px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.reset-pass-request h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.reset-pass-request hr{
+    margin: 3px 0 20px 0;
+    border: 0.5px solid #efeeef;
+}
+/* end request pass reset page */
+
+
+/* start pass reset page */
+.reset-password{
+    width: 550px;
+    margin: 20px 0 10px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.reset-password h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.reset-password hr{
+    margin: 3px 0 20px 0;
+    border: 0.5px solid #efeeef;
+}
+
+.reset-password ul{
+    margin: 0 0 20px 40px;    
+}
+
+.reset-password ul li{
+    padding: 5px;
+    font-size: 12px;
+    color: #aaabae;
+    text-indent: -6px;
+}
+
+.confirm-pass-message{
+    display: block;
+    font-size: 12px;
+    color: #aaabae;
+    margin-top: -15px;
+}
+/* end pass reset page */
