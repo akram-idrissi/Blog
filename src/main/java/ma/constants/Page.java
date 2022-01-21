@@ -8,6 +8,7 @@ public final class Page {
     public final static String TO_HOME = "home.jsp";
     public final static String TO_ABOUT = "about.jsp";
     public final static String TO_LOGIN = "login.jsp";
+    public final static String TO_PROFILE_S = "profile";
     public final static String TO_HOME_S = "home-posts";
     public final static String TO_LOGOUT = "logout.jsp";
     public final static String TO_PROFILE = "profile.jsp";

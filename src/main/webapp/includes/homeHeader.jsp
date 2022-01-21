@@ -12,7 +12,7 @@
                 
                 <div>
                     <a href="addPost.jsp">New Post</a>
-                    <a href="profile">Profile</a>
+                    <a href="profile.jsp">Profile</a>
                     <a href="logout">Logout</a>
                 </div>
             </div>

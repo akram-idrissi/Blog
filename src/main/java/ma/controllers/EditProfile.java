@@ -4,6 +4,7 @@ package ma.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import com.google.gson.Gson;
 import javax.servlet.http.Part;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,19 +29,16 @@ public class EditProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // C:\\Users\\Ce pc\\Desktop\\Blog App\\blog app\\src\\main\\webapp\\images
-        
         // Getting the selected image
         Part part = request.getPart("image");
         String imageName = part.getSubmittedFileName();
-         
+        System.out.println(imageName);
         // getting the current user
         int userID = (int) request.getSession().getAttribute("user");
         User user = (User) UserDB.getUser("select * from user where id = " + userID);
 
-        // Seeting the path for the new image C:\java-blog - Copie\src\main\webapp\images
-        String imgFolderPath = "..\\src\\main\\webapp\\images";
-        String newImage = imgFolderPath + File.separator + imageName;
+        String imagePath = "C:\\Users\\Ce pc\\Desktop\\Blog-web-application\\blog\\src\\main\\webapp\\images";
+        String newImage = imagePath + File.separator + imageName;
 
         // updating user image in db
         user.setImage(imageName);
@@ -48,6 +46,11 @@ public class EditProfile extends HttpServlet {
         
         saveImage(part.getInputStream(), newImage);
         Methods.setMessageInfo(response, request, PROFILE);
+        
+        String gson = new Gson().toJson(user);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(gson);
         
     }
     

@@ -16,39 +16,41 @@
             <div class="padding">
 
                 <div class="profile-user-info">
-                    <img src="images/${user.getImage()}" alt=""/>
+                    <img class="profile-image" src="" alt="profile Image"/>
                     <div class="user-data">
-                        <p>${user.getUsername()}</p>
-                        <p>${user.getEmail()}</p>
+                        <p class="profile-username"></p>
+                        <p class="profile-email"></p>
                     </div>
                 </div>
 
                 <h2>Profile Info</h2>
                 <hr>
-                <form action="edit-profile" method="post" enctype="multipart/form-data">
+                <form id="profile-form" method="post" enctype="multipart/form-data">
 
                     <label>Username*</label><br>
-                    <input type="text" name="username" placeholder=" " value="${user.getUsername()}"><br>
+                    <input class="profile-username-in" type="text" name="username" placeholder=" " value="" readonly="readonly"><br>
                     <span class="username-rules">
                         Required 30 characters or fewer. Letters, digits and @/./+/-/_ only.
                     </span><br>
 
                     <label>Email*</label><br>
-                    <input type="email" name="email" placeholder=" " value="${user.getEmail()}" readonly="readonly"><br>
+                    <input class="profile-email-in" type="email" name="email" placeholder=" " value="" readonly="readonly"><br>
 
                     <h2>Image</h2>
                     <hr>
                     <div class="image-info">
-                        <span>Currently:</span><span id="img-path">/${user.getImage()}</span><br>
+                        <span>Currently:</span><span id="img-path"></span><br>
                         <span class="change-img-button">Change:
-                            <input type="file" name="image">
+                            <input type="file" name="image" id="input-img">
                         </span>
                     </div>
-                    <input type="submit" value="Update">
+                        <input type="submit" value="Update" onclick="profile(this)">
                 </form>
             </div>
         </div>
     </div>
+                        
+    <script src="javascript/profile.js"></script>
     
     
 <jsp:include page="includes/endHtml.jsp" />
