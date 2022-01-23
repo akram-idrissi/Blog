@@ -35,14 +35,14 @@ public class ResetPassword extends HttpServlet {
         String confirm = request.getParameter("new-confirm");
         
         if (Methods.any(new String[]{pass, confirm})){
-            Methods.setMessageInfo(response, request, EMPTY);
+            Methods.setMessageInfo(response, request, EMPTY, false);
         }
         else if (!Methods.isPassword(pass)){
-            Methods.setMessageInfo(response, request, PASS_ERR);
+            Methods.setMessageInfo(response, request, PASS_ERR, false);
         }
         else{
             if (pass.equals(confirm)){
-                Methods.setMessageInfo(null, request, NONE);
+                Methods.setMessageInfo(null, request, NONE, true);
                 
                 String salt = PasswordUtil.getSalt();
                 String hash = PasswordUtil.hashPassword(pass + salt);
@@ -51,11 +51,12 @@ public class ResetPassword extends HttpServlet {
                 user.setHashedpass(hash);
                 UserDB.update(user);
                 
+                session.removeAttribute("message");
                 session.removeAttribute("user-non-valid-id");
                 response.sendRedirect(TO_LOGIN);
             }
             else{
-                Methods.setMessageInfo(response, request, CONFPASS_ERR);
+                Methods.setMessageInfo(response, request, CONFPASS_ERR, false);
             }
         }
         

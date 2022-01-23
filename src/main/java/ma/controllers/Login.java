@@ -31,12 +31,12 @@ public class Login extends HttpServlet {
         
         // If any input is empty
         if (Methods.any(fields)) {
-            Methods.setMessageInfo(response, request, EMPTY);
+            Methods.setMessageInfo(response, request, EMPTY, false);
         } 
         
         // If the email do not exist
         else if (Objects.isNull(UserDB.getUser(usnQuery))){
-            Methods.setMessageInfo(response, request, EMAIL_ERR);
+            Methods.setMessageInfo(response, request, USN_ERR, false);
         }
         else {
             User user = UserDB.getUser(usnQuery);
@@ -48,14 +48,17 @@ public class Login extends HttpServlet {
                 
                 // If the pass != hashDB show error msg else send user to home
                 if (Objects.isNull(Methods.verifyHash(password, saltDB, hashDB))) {
-                    Methods.setMessageInfo(response, request, PASS_ERR);
+                    Methods.setMessageInfo(response, request, PASS_ERR, false);
                     
                 } else {
-                    Methods.setMessageInfo(response, request, NONE);
+                    Methods.setMessageInfo(response, request, NONE, true);
                     session.setAttribute("user", user.getId());
+                    
                     response.sendRedirect(TO_HOME_S);
                 }
             }
         }
+        
+        
     }
 }

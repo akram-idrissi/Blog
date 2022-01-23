@@ -23,8 +23,9 @@ public class PostDetail extends HttpServlet {
         
         String url;
         HttpSession session = request.getSession();
-        String date = request.getParameter("postDate");    
-        String postQuery = String.format("select * from Post where posted_date = '%s'", date);
+        String title = request.getParameter("title");    
+        String date = request.getParameter("post-date");    
+        String postQuery = String.format("select * from Post where posted_date = '%s' and title = '%s'", date, title);
         
         // getting the post with the specific date
         Post post = (Post) PostDB.getPost(postQuery);

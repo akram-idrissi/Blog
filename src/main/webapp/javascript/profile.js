@@ -29,16 +29,21 @@ window.onload = function() {
 
 };
 
+
+
 function profile(btn){
     
-    var form = document.getElementById("profile-form");
+    var FORM = document.getElementById("profile-form");
+    
     function handleForm(event) {
         event.preventDefault();
     }
-    form.addEventListener('submit', handleForm);
-    let selectedImg;
     
-    var file = document.getElementById('input-img').files[0];
+    FORM.addEventListener('submit', handleForm);
+    
+    console.log(document.getElementById("input-img").files[0]);
+    var formData = new FormData();
+    formData.append("image", document.getElementById("input-img").files[0]);
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -58,11 +63,16 @@ function profile(btn){
             
             document.getElementById("img-path").textContent = "/" + img;
             document.querySelector(".profile-image").src = "images/" + img;
+            window.location.reload();
             
         }
-     };    
+        
+        
+    };    
     
     xhttp.open("POST", "http://localhost:8090/blog/edit-profile", true);
-    xhttp.send("image="+file);
-    
+    xhttp.send(formData);
+//    setTimeout(l, 3000);
 };
+
+

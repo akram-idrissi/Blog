@@ -42,12 +42,12 @@ public class Email extends HttpServlet {
         
         // If the email input is empty
         if (Methods.any(new String[]{email})){
-            Methods.setMessageInfo(response, request, EMPTY);
+            Methods.setMessageInfo(response, request, EMPTY, false);
         } 
         
         // If the emial address doesn not exist
         else if(UserDB.getUser(emailQuery) == null){
-            Methods.setMessageInfo(response, request, EMAIL_ERR);
+            Methods.setMessageInfo(response, request, EMAIL_ERR, false);
         } 
         
         else{
@@ -62,7 +62,7 @@ public class Email extends HttpServlet {
             VerifyPasswordDB.insert(vp);
             
             MailUtilGmail.sendMail(email, subject, body, false);
-            Methods.setMessageInfo(response, request, EMAIL_PASS_RESET);
+            Methods.setMessageInfo(response, request, EMAIL_PASS_RESET, true);
             response.sendRedirect(TO_DONE);
         }
         

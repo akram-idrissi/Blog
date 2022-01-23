@@ -162,9 +162,8 @@ input[type=password]:focus{
 textArea{
     resize: none;
     margin-top: 5px;
-    padding-top: 10px;
+    padding: 10px;
     border-radius: 5px;
-    padding-left: 15px;
     margin-bottom: 20px;
     border: 0.5px solid #e9e8e9;
 }
@@ -191,7 +190,35 @@ textArea:focus{
     background-color: #17a2b8;
 }
 
+.message{
+    width: 550px;
+    margin-top: 20px;
+}
 
+.done-message{
+    display: block;
+    color: #0c5460;
+    padding: 0.75rem 1%;
+    border-color: #bee5eb;
+    background-color: #d1ecf1;
+
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+}
+
+.error-message{
+    display: block;
+    color: #721c24;
+    padding: 0.75rem 1%;
+    border-color: #f5c6cb;
+    background-color: #f8d7da;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+}
 /* start header */
 .header{
     background-color: #556e80;
@@ -684,6 +711,12 @@ textArea:focus{
 
 .meta{
     margin: 0;
+    font-size: 13px;
+    color: #aaaaaa;
+}
+
+.pull-right{
+    float: right;
 }
 
 .meta a{
@@ -693,8 +726,12 @@ textArea:focus{
     transition: 0.3s;
 }
 
-.meta a:hover{
-    text-decoration: underline;
+.meta span{
+    font-size: 15px;
+}
+
+.meta span:hover{
+    text-decoration: none;
 }
 
 .comment-body .content{
@@ -704,6 +741,44 @@ textArea:focus{
 .break-line{
     margin: 10px 0; 
     border: 0.5px solid #efeeef;
+}
+
+.no-comments{
+    margin: 15px 0;
+}
+
+.line{
+    width: 550px;
+}
+
+.add-comment-btn{
+    width: 50px;
+    float: right;
+    color: #17a2b8;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 0.5px solid #17a2b8;
+    background-color: transparent;
+
+    transition: 0.3s;
+}
+
+.add-comment-btn:hover{
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.add-comment{
+    width: 550px;
+    margin: 190px 0 50px 0;
+}
+
+.delete-comment{
+    color: #dc3545;
+}
+
+.update-comment{
+    color: #198754;
 }
 /* end comment page */
 
@@ -791,3 +866,22 @@ textArea:focus{
     margin-top: -15px;
 }
 /* end pass reset page */
+
+
+/*start add comment*/
+.new-comment{
+    width: 550px;
+    margin: 20px 0;
+    background-color: #fff;
+    border: 0.5px solid #efeeef;
+}
+
+.new-comment h2{
+    color: #484748;
+    text-decoration: none;
+}
+
+.new-comment hr{
+    border: 0.5px solid #efeeef;
+}
+/*end add comment*/

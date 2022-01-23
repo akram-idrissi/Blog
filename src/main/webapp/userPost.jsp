@@ -31,15 +31,15 @@
 
                             <div class="insights">
                                 <a onclick="likeInsight(this)" href="javascript:void(0);" class="like">
-                                    <i class="bi bi-hand-thumbs-up"></i><span class="likeInsight"></span>
+                                    <i class="bi bi-hand-thumbs-up"></i><span class="likeInsight">${post.getLikeCount()}</span>
                                 </a>
 
                                 <a onclick="dislikeInsight(this)" href="javascript:void(0);" class="dislike">
-                                    <i class="bi bi-hand-thumbs-down"></i><span class="dislikeInsight"></span>
+                                    <i class="bi bi-hand-thumbs-down"></i><span class="dislikeInsight">${post.getDislikeCount()}</span>
                                 </a>
 
-                                <a href="comments.jsp" class="comment">
-                                    <i class="bi bi-chat"></i><span class="commentInsight"></span>
+                                <a href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}" class="comment">
+                                    <i class="bi bi-chat"></i><span class="commentInsight">${post.getCommentCount()}</span>
                                 </a>
                             </div>
                         </div>
@@ -48,6 +48,10 @@
             </li>
         </ul>
     </div>
+                            
+    <div class="container">
+        <a href="" class="comments-link">see comments</a>
+    </div> 
                 
     <script src="javascript/readMore.js"></script>
     <script src="javascript/insight.js"></script>

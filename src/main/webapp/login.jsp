@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="container">
+        <div class="message">
+            <p class="error-message">${message}</p>
+        </div>
+    </div> 
+        
+    <div class="container">
         <div class="login">
             <div class="padding">
                 <h2>Log In</h2>
@@ -28,4 +34,5 @@
             <span>Need An Account?</span><a href="register.jsp">Sign Up Now</a>
         </div>
     </div>
+    
 <jsp:include page="includes/endHtml.jsp" /> 

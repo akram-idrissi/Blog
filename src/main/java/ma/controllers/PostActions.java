@@ -11,10 +11,10 @@ import ma.data.UserDB;
 import ma.data.PostDB;
 import ma.business.Post;
 import ma.business.User;
-import ma.data.PostInsightDB;
-import ma.business.Postinsight;
+import ma.business.Comment;
 
 import static ma.constants.Page.*;
+import ma.data.CommentDB;
 
 public class PostActions extends HttpServlet {
 
@@ -81,19 +81,16 @@ public class PostActions extends HttpServlet {
         HttpSession session = req.getSession();
         Post post = (Post) session.getAttribute("post");
         
-        String postIsgQuery = "select * from postinsight where user_id = " +
+        String commentQuery = "select * from comment where user_id = " +
                 user.getId() + " and post_id =  " + post.getId();
         
-        try{
-            Postinsight postIsg = PostInsightDB.getPostInsight(postIsgQuery);
-            PostInsightDB.delete(postIsg);
-        } catch(NullPointerException ex){
-        
-        } finally{
-            PostDB.delete(post);
-        }
-        
-        
+        Comment comment = CommentDB.getComment(commentQuery);
+
+        if(comment != null){
+            CommentDB.delete(comment);
+        } 
+
+        PostDB.delete(post);
         session.removeAttribute("post");
     }
 }

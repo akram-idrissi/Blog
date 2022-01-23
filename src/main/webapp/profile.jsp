@@ -10,7 +10,7 @@
             response.sendRedirect("login.jsp");
         }
     %>
-
+    
     <div class="container">
         <div class="profile">
             <div class="padding">
@@ -25,7 +25,7 @@
 
                 <h2>Profile Info</h2>
                 <hr>
-                <form id="profile-form" method="post" enctype="multipart/form-data">
+                <form id="profile-form" method="post" enctype="multipart/form-data" onsubmit="profile(this)">
 
                     <label>Username*</label><br>
                     <input class="profile-username-in" type="text" name="username" placeholder=" " value="" readonly="readonly"><br>
@@ -44,7 +44,7 @@
                             <input type="file" name="image" id="input-img">
                         </span>
                     </div>
-                        <input type="submit" value="Update" onclick="profile(this)">
+                        <input type="submit" value="Update" >
                 </form>
             </div>
         </div>

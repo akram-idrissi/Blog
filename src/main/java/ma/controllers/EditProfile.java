@@ -32,7 +32,7 @@ public class EditProfile extends HttpServlet {
         // Getting the selected image
         Part part = request.getPart("image");
         String imageName = part.getSubmittedFileName();
-        System.out.println(imageName);
+        
         // getting the current user
         int userID = (int) request.getSession().getAttribute("user");
         User user = (User) UserDB.getUser("select * from user where id = " + userID);
@@ -44,8 +44,12 @@ public class EditProfile extends HttpServlet {
         user.setImage(imageName);
         UserDB.update(user);
         
-        saveImage(part.getInputStream(), newImage);
-        Methods.setMessageInfo(response, request, PROFILE);
+        boolean saved = saveImage(part.getInputStream(), newImage);
+        
+        if(saved)
+            Methods.setMessageInfo(response, request, PROFILE, true);
+        else
+            Methods.setMessageInfo(response, request, PROFILE_ERR, false);
         
         String gson = new Gson().toJson(user);
         response.setContentType("application/json");
@@ -54,7 +58,7 @@ public class EditProfile extends HttpServlet {
         
     }
     
-    public void saveImage(InputStream is, String path) throws IOException{
+    public boolean saveImage(InputStream is, String path) throws IOException{
         
         try {
             byte[] b  = new byte[is.available()];
@@ -65,9 +69,12 @@ public class EditProfile extends HttpServlet {
             fileOS.flush();
             fileOS.close();
             
+            return true;
+            
         } catch (IOException ex) {
             Logger.getLogger(EditProfile.class.getName()).log(
                     Level.SEVERE, null, ex);
+            return false;
         }
         
     }

@@ -39,12 +39,15 @@ public final class Methods {
         return matcher.matches();
     }
     
-    public final static void setMessageInfo(HttpServletResponse res, HttpServletRequest req, String message){
-        req.setAttribute("message", message);
+    public final static void setMessageInfo(HttpServletResponse res, HttpServletRequest req, String message, boolean b){
+        req.getSession().setAttribute("message", message);
         
         try {
             if(res != null)
-                res.getWriter().write("message");
+                if(b)
+                    res.getWriter().write("valide");
+                else
+                    res.getWriter().write("error");
         } catch (IOException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }

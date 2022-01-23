@@ -30,26 +30,21 @@ public class VerifyEmailAddress extends HttpServlet {
         String emailQuery = String.format("select * from User where email = '%s' ", email);
         String codeQuery = String.format("select * from Verifyemail where code = '%s' ", code);
         
-        System.out.println(codeQuery);
-        System.out.println(emailQuery);
-        
         // If the code is empty
         if(code.equals("")){
             System.out.println("break here 1");
             url = TO_REGISTER;
-            Methods.setMessageInfo(null, request, NONE);
+            Methods.setMessageInfo(null, request, NONE, false);
             
         } else{
             User user = UserDB.getUser(emailQuery);
             Verifyemail ve = (Verifyemail) VerifyEmailDB.getVerifyEmail(codeQuery);
 
             // If user and code exist
-            System.out.println("l " + code);
-            System.out.println("v " + ve.getCode());
             if(ve.getCode().compareTo(code) != 0){
                 System.out.println("break here 2");
                 url = TO_REGISTER;
-                Methods.setMessageInfo(null, request, NONE);
+                Methods.setMessageInfo(null, request, NONE, false);
                 
                 
             }else{
@@ -61,7 +56,7 @@ public class VerifyEmailAddress extends HttpServlet {
                 VerifyEmailDB.update(ve);
                 UserDB.update(user);
                 request.getSession().removeAttribute("user-email");
-                Methods.setMessageInfo(null, request, NONE);
+                Methods.setMessageInfo(null, request, NONE, false);
             }
 
         }

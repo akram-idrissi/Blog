@@ -36,7 +36,7 @@ public class VerifyPassword extends HttpServlet {
         }
         else{
             url = TO_PASS_ERR;
-            Methods.setMessageInfo(response, request, PASS_RESET_ERR);
+            Methods.setMessageInfo(response, request, PASS_RESET_ERR, false);
         }
         
         response.sendRedirect(url);

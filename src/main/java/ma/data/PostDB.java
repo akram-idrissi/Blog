@@ -37,7 +37,6 @@ public class PostDB {
             
         } catch (SQLException ex) {
             Logger.getLogger(PostDB.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("no");
             return 0;
             
         } finally {
@@ -113,17 +112,21 @@ public class PostDB {
         try {
             ps = connection.prepareStatement(query);
             resultset = ps.executeQuery();
-            resultset.next();
-            return new Post(
-                resultset.getInt("id"),
-                UserDB.getUser("select * from user where id = " + resultset.getInt("user_id")),
-                resultset.getString("title"),
-                resultset.getString("content"),
-                resultset.getInt("like_count"),
-                resultset.getInt("dislike_count"),
-                resultset.getInt("comment_count"),
-                resultset.getString("posted_date")
-             );
+            
+            if(resultset.next()){
+                return new Post(
+                    resultset.getInt("id"),
+                    UserDB.getUser("select * from user where id = " + resultset.getInt("user_id")),
+                    resultset.getString("title"),
+                    resultset.getString("content"),
+                    resultset.getInt("like_count"),
+                    resultset.getInt("dislike_count"),
+                    resultset.getInt("comment_count"),
+                    resultset.getString("posted_date")
+                 );
+            } else{
+                return null;
+            }
                 
         } catch (SQLException ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);

@@ -7,24 +7,25 @@ public class Commentinsight  implements java.io.Serializable {
     private Post post;
     private Comment comment;
     private Integer isCommented;
-    private String commentInsDate;
     private Integer isLike;
     private Integer isDislike;
+    private String commentInsDate;
+    
 
     public Commentinsight() {
     }
 
-    public Commentinsight(Integer id, User user, Post post, Comment comment, Integer isCommented, String commentInsDate, Integer isLike, Integer isDislike) {
+    public Commentinsight(Integer id, User user, Post post, Comment comment, Integer isCommented, Integer isLike, Integer isDislike, String commentInsDate) {
         this.id = id;
         this.user = user;
         this.post = post;
         this.comment = comment;
         this.isCommented = isCommented;
-        this.commentInsDate = commentInsDate;
         this.isLike = isLike;
         this.isDislike = isDislike;
+        this.commentInsDate = commentInsDate;
     }
-    
+
     public Integer getId() {
         return this.id;
     }

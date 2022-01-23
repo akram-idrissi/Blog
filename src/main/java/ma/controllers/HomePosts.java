@@ -13,6 +13,7 @@ import ma.business.Post;
 
 import static ma.constants.Page.*;
 
+
 public class HomePosts extends HttpServlet {
 
     @Override
@@ -23,5 +24,7 @@ public class HomePosts extends HttpServlet {
         ArrayList<Post> posts = PostDB.getAll();
         request.setAttribute("posts", posts);
         request.getRequestDispatcher(TO_HOME).forward(request, response);
+        
+        
     }
 }

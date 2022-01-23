@@ -96,15 +96,17 @@ public class PostInsightDB {
         try {
             ps = connection.prepareStatement(query);
             resultset = ps.executeQuery();
-            resultset.next();
-            return new Postinsight(
-                resultset.getInt("id"),
-                UserDB.getUser("select * from user where id = " + resultset.getInt("user_id")),
-                PostDB.getPost("select * from post where id = " + resultset.getInt("post_id")), 
-                resultset.getInt("is_like"),
-                resultset.getInt("is_dislike"),
-                resultset.getString("postIns_date")
-             );
+            if(resultset.next()){
+                return new Postinsight(
+                    resultset.getInt("id"),
+                    UserDB.getUser("select * from user where id = " + resultset.getInt("user_id")),
+                    PostDB.getPost("select * from post where id = " + resultset.getInt("post_id")), 
+                    resultset.getInt("is_like"),
+                    resultset.getInt("is_dislike"),
+                    resultset.getString("postIns_date")
+                 );
+            } else
+                return null;
                 
         } catch (SQLException ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);

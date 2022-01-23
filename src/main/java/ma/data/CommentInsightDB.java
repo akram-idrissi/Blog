@@ -1,6 +1,8 @@
 
 package ma.data;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,7 +21,7 @@ public class CommentInsightDB{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "insert into commentinsight values(?, ?, ?, ?, ?, ?)";
+        String query = "insert into commentinsight (user_id, post_id, comment_id, is_commented, is_like, is_dislike) values(?, ?, ?, ?, ?, ?)";
         
         try {
             ps = connection.prepareStatement(query);
@@ -72,8 +74,6 @@ public class CommentInsightDB{
         
     }
     
-    
-    
     public static long delete(Commentinsight ci){
         
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -99,6 +99,73 @@ public class CommentInsightDB{
         
     }
     
+    public static Commentinsight getCommentIsg(String query){
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs;
+        
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            rs.next();
+            return new Commentinsight(
+                    rs.getInt(1),
+                    UserDB.getUser("select * from user where id = " + rs.getInt(2)),
+                    PostDB.getPost("select * from post where id = " + rs.getInt(3)),
+                    CommentDB.getComment("select * from comment where id = " + rs.getInt(4)),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getInt(7),
+                    rs.getString(8)
+            );
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentInsightDB.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
     
-    
+    public static ArrayList<Commentinsight> getAll(String query){
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ArrayList<Commentinsight> all = new ArrayList<>();
+        ResultSet rs;
+        
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                all.add(
+                
+                    new Commentinsight(
+                    rs.getInt(1),
+                    UserDB.getUser("select * from user where id = " + rs.getInt(2)),
+                    PostDB.getPost("select * from post where id = " + rs.getInt(3)),
+                    CommentDB.getComment("select * from comment where id = " + rs.getInt(4)),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getInt(7),
+                    rs.getString(8)
+                ));
+            }
+            
+            return all;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentInsightDB.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        
+    }
 }
