@@ -28,13 +28,15 @@
                                 <div class="post-desc">
                                     <span class="username">${post.getUser().getUsername()}</span>
 
-                                    <span class="post-date">${post.getPostedDate()}</span>
+                                    <fmt:parseDate value="${post.getPostedDate()}" type="date" pattern="yyyy-MM-dd HH:mm:ss" var="fdate" />
+                                    <fmt:formatDate value="${fdate}" type="date" pattern="MMM dd, yyyy" var="string"/>
+                                    <span class="post-date">${string}</span>
                                     <hr>
                                     <a href="post-detail?post-date=${post.getPostedDate()}&title=${post.getTitle()}">
                                         <h2 class="post-title">${post.getTitle()}</h2>
                                     </a>
                                     <p class="content">${post.getContent()}</p>
-                                    <button onclick="readMore(this)" class="read-more-btn">Read More</button>
+                                    <span onclick="readMore(this)" class="read-more-btn">Read More</span>
 
                                     <div class="insights">
                                         <a onclick="likeInsight(this)" href="javascript:void(0);" class="like">
@@ -45,7 +47,7 @@
                                             <i class="bi bi-hand-thumbs-down"></i><span class="dislikeInsight">${post.getDislikeCount()}</span>
                                         </a>
 
-                                        <a href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}" class="comment">
+                                        <a href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}&see-more=false" class="comment">
                                             <i class="bi bi-chat"></i><span class="commentInsight">${post.getCommentCount()}</span>
                                         </a>
                                     </div>
@@ -58,6 +60,17 @@
 
         </c:forEach>
     </c:if>
+
+    
+            <div class="container">
+                <div class="home-pagination">
+                    <c:forEach var="page" items="${pages}">
+                        <a href="home-posts?page=${page}">${page}</a>
+                    </c:forEach>
+                </div>
+            </div>
+        
+    
     
 <script src="javascript/insight.js"></script>
 <script src="javascript/readMore.js"></script>

@@ -24,7 +24,7 @@ function likeInsight(icon){
     let postDesc = insight.parentElement;
     let post = postDesc.parentElement;
     let date = post.querySelector(".hidden-date").textContent;
-    let title = postDesc.querySelector(".post-title").textContent;
+    let title = postDesc.getElementsByTagName("h2")[0].textContent;
     
     
     let likeIcon = insight.querySelector(".like");
@@ -50,7 +50,7 @@ function dislikeInsight(icon){
     let postDesc = insight.parentElement;
     let post = postDesc.parentElement;
     let date = post.querySelector(".hidden-date").textContent;
-    let title = postDesc.querySelector(".post-title").textContent;
+    let title = postDesc.getElementsByTagName("h2")[0].textContent;
     
     let likeIcon = insight.querySelector(".like");
     let dislikeIcon = insight.querySelector(".dislike");

@@ -56,6 +56,17 @@ a:hover{
     text-decoration: underline;
 }
 
+.see-more{
+    font-size: 12px;
+    color: #007bff;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.see-more:hover{
+    text-decoration: underline;
+}
+
 .insights{
     float: right;
     margin-top: 11px;
@@ -177,17 +188,8 @@ textArea:focus{
 
 .read-more-btn{
     color: #17a2b8;
-    padding: 6px 10px;
-    border-radius: 3px;
-    border: 0.5px solid #17a2b8;
-    background-color: transparent;
-    
-    transition: 0.3s;
-}
-
-.read-more-btn:hover{
-    color: #fff;
-    background-color: #17a2b8;
+    cursor: pointer;
+    font-size: 13px;
 }
 
 .message{
@@ -331,9 +333,27 @@ textArea:focus{
 }
 
 .content{
+    margin: 10px 0;
+    line-height: 1.3;
     text-align: justify;
-    margin: 5px 0 10px 0;
 }
+
+.home-pagination{
+    width: 550px;
+    cursor: pointer;
+    margin-top: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    display: inline-block;
+    
+    transition: 0.3s;
+}
+
+.home-pagination a{
+    color: #17a2b8;
+    padding: 6px 10px;
+}
+
 /* end post page */
 
 

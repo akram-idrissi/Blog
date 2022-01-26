@@ -20,11 +20,39 @@ public class HomePosts extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        ArrayList<Post> posts = PostDB.getAll("select * from post");
+        String page = request.getParameter("page");
         request.getSession().removeAttribute("post");
-        ArrayList<Post> posts = PostDB.getAll();
-        request.setAttribute("posts", posts);
+        
+        int range;
+        final int postPerPage = 5;
+        int totalPosts = posts.size();
+        int totalPages = (int) Math.ceil((float) totalPosts / postPerPage);
+        
+        int[] pages = new int[totalPages];
+        for(int i = 0; i < totalPages; i++){
+            pages[i] = i + 1;
+        }
+        
+        if(page != null){
+            int pageNumber = Integer.parseInt(page);
+            range = postPerPage * (pageNumber - 1);
+            String query = String.format("select * from post order by id desc limit %d, 5", range);
+            posts = PostDB.getAll(query);
+            
+            request.setAttribute("pages", pages);
+            request.setAttribute("posts", posts);
+            
+            
+        } else{
+            posts.clear();
+            posts = PostDB.getAll("select * from post order by id desc limit 0, 5");
+
+            request.setAttribute("pages", pages);
+            request.setAttribute("posts", posts);
+        }
+        
         request.getRequestDispatcher(TO_HOME).forward(request, response);
-        
-        
     }
 }
+

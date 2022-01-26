@@ -81,16 +81,18 @@ public class PostActions extends HttpServlet {
         HttpSession session = req.getSession();
         Post post = (Post) session.getAttribute("post");
         
-        String commentQuery = "select * from comment where user_id = " +
-                user.getId() + " and post_id =  " + post.getId();
+        try{
+            CommentDB.delete("delete from comment where post_id = " + post.getId());
+            PostDB.delete(post);
+        } catch(Exception ex){
+            PostDB.delete(post);
+        }
+
+//        if(comment != null){
+//            CommentDB.delete("delete from comment where post_id = " + post.getId());
+//        } 
+//        PostDB.delete(post);
         
-        Comment comment = CommentDB.getComment(commentQuery);
-
-        if(comment != null){
-            CommentDB.delete(comment);
-        } 
-
-        PostDB.delete(post);
         session.removeAttribute("post");
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>blog app</display-name>
+    
     <!--servlet-->
     <servlet>
         <servlet-name>Login</servlet-name>
@@ -54,10 +55,15 @@
         <servlet-name>PostInsights</servlet-name>
         <servlet-class>ma.controllers.PostInsights</servlet-class>
     </servlet>
+    
     <!-- Servlet Mapping -->
     <servlet>
         <servlet-name>Comments</servlet-name>
         <servlet-class>ma.controllers.Comments</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentActions</servlet-name>
+        <servlet-class>ma.controllers.CommentActions</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -115,7 +121,12 @@
         <servlet-name>Comments</servlet-name>
         <url-pattern>/comments</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentActions</servlet-name>
+        <url-pattern>/comment-action</url-pattern>
+    </servlet-mapping>
     
+    <!-- welcome files -->
     <welcome-file-list>
         <welcome-file>home-posts</welcome-file>
     </welcome-file-list>

@@ -72,16 +72,14 @@ public class CommentDB {
     }
     
     
-    public static long delete(Comment cmt){
+    public static long delete(String query){
         
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "delete from comment where id = ?";
         
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, cmt.getId());
 
             return ps.executeUpdate();
 

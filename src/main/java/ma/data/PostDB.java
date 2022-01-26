@@ -139,16 +139,16 @@ public class PostDB {
         
     }
     
-    public static ArrayList<Post> getAll(){
+    public static ArrayList<Post> getAll(String query){
         
         ArrayList<Post> posts = new ArrayList();
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet resultset = null;
-        String select = "select * from post order by id desc";
+
         try {
-            ps = connection.prepareStatement(select);
+            ps = connection.prepareStatement(query);
             resultset = ps.executeQuery();
             while(resultset.next()){
                 posts.add(new Post(
