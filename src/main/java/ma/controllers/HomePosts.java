@@ -51,7 +51,7 @@ public class HomePosts extends HttpServlet {
             request.setAttribute("pages", pages);
             request.setAttribute("posts", posts);
         }
-        
+        request.setAttribute("page", page);
         request.getRequestDispatcher(TO_HOME).forward(request, response);
     }
 }

@@ -3,14 +3,14 @@ package ma.business;
 
 public class Post  implements java.io.Serializable {
 
-    private Integer id;
     private User user;
+    private Integer id;
     private String title;
     private String content;
+    private String postedDate;
     private Integer likeCount;
     private Integer dislikeCount;
     private Integer commentCount;
-    private String postedDate;
     
     public Post() {
     }
@@ -20,6 +20,7 @@ public class Post  implements java.io.Serializable {
         this.user = user;
         this.postedDate = postedDate;
     }
+    
     public Post(Integer id, User user, String title, String content, Integer likeCount, Integer dislikeCount, Integer commentCount, String postedDate) {
         this.id = id;
         this.user = user;

@@ -14,7 +14,9 @@ import ma.business.Post;
 import ma.business.User;
 import ma.data.CommentDB;
 import ma.business.Comment;
-import ma.constants.Page;
+import ma.constants.Methods;
+
+import static ma.constants.Page.*;
 
 
 public class CommentActions extends HttpServlet {
@@ -32,6 +34,7 @@ public class CommentActions extends HttpServlet {
         User user = UserDB.getUser("select * from User where id = " + (int) session.getAttribute("user"));
         Post post = PostDB.getPost(String.format("select * from post where posted_date = '%s' and title = '%s'", date, title));
         
+            
         if(user != null){
             switch (action) {
                 case "add" -> {
@@ -49,8 +52,9 @@ public class CommentActions extends HttpServlet {
                 }
             }
         } else{
-            response.sendRedirect(Page.TO_HOME_S);
+            response.sendRedirect(TO_HOME_S);
         }
+       
     }
 
     private void addComment(HttpServletRequest request, User user, Post post) {

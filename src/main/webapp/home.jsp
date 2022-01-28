@@ -64,8 +64,19 @@
     
             <div class="container">
                 <div class="home-pagination">
-                    <c:forEach var="page" items="${pages}">
-                        <a href="home-posts?page=${page}">${page}</a>
+                    <c:forEach var="p" items="${pages}">
+                        <c:choose>
+                            <c:when test="${page == null && p == 1}">
+                                <a class="current-page" href="home-posts?page=${p}">${p}</a>
+                            </c:when>
+                            <c:when test="${page == p}">
+                                <a class="current-page" href="home-posts?page=${p}">${p}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="home-posts?page=${p}">${p}</a>
+                            </c:otherwise>
+                        </c:choose>
+                        
                     </c:forEach>
                 </div>
             </div>

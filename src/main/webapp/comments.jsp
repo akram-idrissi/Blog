@@ -108,7 +108,7 @@
                  
             <c:if test="${comments.size() == 5}">
                     <div class="container">
-                        <a class="see-more" href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}?see-more=true">see more</a>
+                        <a class="see-more" href="javascript:void(0);" onclick="seeMore()" >see more</a>
                     </div>
             </c:if>
         </c:when>  
@@ -121,7 +121,7 @@
 
         </c:otherwise>
     </c:choose>
-                                
+           
     
     <c:if test="${user != null}">                          
         
@@ -139,7 +139,7 @@
     </c:if>  
 
 <script src="javascript/comments.js"></script>
+<script src="javascript/insight.js"></script>
 <script src="javascript/readMore.js"></script>
-<script src="javascript/comments.js"></script>
 
 <jsp:include page="includes/endHtml.jsp" />
