@@ -88,11 +88,6 @@ public class PostActions extends HttpServlet {
             PostDB.delete(post);
         }
 
-//        if(comment != null){
-//            CommentDB.delete("delete from comment where post_id = " + post.getId());
-//        } 
-//        PostDB.delete(post);
-        
         session.removeAttribute("post");
     }
 }

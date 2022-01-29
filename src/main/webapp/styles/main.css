@@ -778,11 +778,11 @@ textArea:focus{
     margin: 190px 0 50px 0;
 }
 
-.delete-comment{
+#delete-comment{
     color: #dc3545;
 }
 
-.update-comment{
+#update-comment{
     color: #198754;
 }
 /* end comment page */

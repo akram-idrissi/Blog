@@ -49,7 +49,7 @@ public class CommentDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update comment set content = ?,"
-                + " ike_count = ?,"
+                + " like_count = ?,"
                 + " dislike_count = ?"
                 + " where id = ?";
         

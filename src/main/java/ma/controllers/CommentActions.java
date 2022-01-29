@@ -14,7 +14,6 @@ import ma.business.Post;
 import ma.business.User;
 import ma.data.CommentDB;
 import ma.business.Comment;
-import ma.constants.Methods;
 
 import static ma.constants.Page.*;
 
@@ -22,35 +21,35 @@ import static ma.constants.Page.*;
 public class CommentActions extends HttpServlet {
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
         
-        String date = request.getParameter("date");
+        String date = request.getParameter("post-date");
         String title = request.getParameter("title");
         String action = request.getParameter("action");
-
+        
         User user = UserDB.getUser("select * from User where id = " + (int) session.getAttribute("user"));
         Post post = PostDB.getPost(String.format("select * from post where posted_date = '%s' and title = '%s'", date, title));
         
-            
         if(user != null){
             switch (action) {
                 case "add" -> {
                     addComment(request, user, post);
-                    request.getRequestDispatcher("comments").forward(request, response);
                 }
                 case "update" -> {
                     updateComment(request);
                 }
                 case "delete" -> {
-                    deleteComment(request, user);
+                    deleteComment(request, post);
                 }
                 default -> {
 
                 }
             }
+            request.getRequestDispatcher("comments").forward(request, response);
+            
         } else{
             response.sendRedirect(TO_HOME_S);
         }
@@ -73,12 +72,17 @@ public class CommentActions extends HttpServlet {
     }
 
     private void updateComment(HttpServletRequest request) {
-    
+        
+        
     
     }
 
-    private void deleteComment(HttpServletRequest request, User user) {
-        
+    private void deleteComment(HttpServletRequest request, Post post) {
+        String date = request.getParameter("comment-date");
+        String query = String.format("delete from comment where comment_date = '%s' ", date);
+        CommentDB.delete(query);
+        post.setCommentCount(post.getCommentCount() - 1);
+        PostDB.update(post);
     }
 
 }

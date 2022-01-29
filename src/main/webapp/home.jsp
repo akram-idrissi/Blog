@@ -47,7 +47,7 @@
                                             <i class="bi bi-hand-thumbs-down"></i><span class="dislikeInsight">${post.getDislikeCount()}</span>
                                         </a>
 
-                                        <a href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}&see-more=false" class="comment">
+                                        <a href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}" class="comment">
                                             <i class="bi bi-chat"></i><span class="commentInsight">${post.getCommentCount()}</span>
                                         </a>
                                     </div>

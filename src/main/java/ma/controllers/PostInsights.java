@@ -62,7 +62,20 @@ public class PostInsights extends HttpServlet {
                             
                             PostDB.update(post);
                             PostInsightDB.insert(postI);
-                        } 
+                            
+                        } else if(postI.getIsLike() == 1){
+                            postI.setIsLike(0);
+                            post.setLikeCount(likeCount - 1);
+                            
+                            PostDB.update(post);
+                            PostInsightDB.update(postI);
+                        } else{
+                            postI.setIsLike(1);
+                            post.setLikeCount(likeCount + 1);
+                            
+                            PostDB.update(post);
+                            PostInsightDB.update(postI);
+                        }
                         
                     } else {
 
@@ -94,7 +107,20 @@ public class PostInsights extends HttpServlet {
                             
                             PostDB.update(post);
                             PostInsightDB.insert(postI);
-                        } 
+                            
+                        } else if(postI.getIsDislike() == 1){
+                            postI.setIsDislike(0);
+                            post.setDislikeCount(dislikeCount - 1);
+                            
+                            PostDB.update(post);
+                            PostInsightDB.update(postI);
+                        } else{
+                            postI.setIsDislike(1);
+                            post.setDislikeCount(dislikeCount + 1);
+                            
+                            PostDB.update(post);
+                            PostInsightDB.update(postI);
+                        }
                         
                     } else {
                         postI = new Postinsight();

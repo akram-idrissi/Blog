@@ -66,8 +66,10 @@
                             <li class="comment-page">
                                 <div class="padding">
                                     <div class="comment-body">
+                                        <span class="comment-hidden-date" style="display: none">${comment.getCommentDate()}</span>
                                         <img src="images/${comment.getUser().getImage()}" class="avatar" alt="">
                                         <div class="user-info">
+                                            
                                             <fmt:parseDate value="${comment.getCommentDate()}" type="date" pattern="yyyy-MM-dd HH:mm:ss" var="fdate" />
                                             <fmt:formatDate value="${fdate}" type="date" pattern="MMM d, yyyy" var="string"/>
 
@@ -75,8 +77,8 @@
                                                 <i class="pull-right">
                                                     <a href="#">
                                                         <c:if test="${comment.getUser().getId() == user}">
-                                                            <span class="update-comment"><i class="bi bi-arrow-repeat"></i></span>
-                                                            <span class="delete-comment" ><i class="bi bi-trash"></i></span>
+                                                            <a href="comment-action?action=update&post-date=${post.getPostedDate()}&title=${post.getTitle()}&comment-date=${comment.getCommentDate()}" id="update-comment"><i class="bi bi-arrow-repeat"></i></a>
+                                                            <a href="comment-action?action=delete&post-date=${post.getPostedDate()}&title=${post.getTitle()}&comment-date=${comment.getCommentDate()}" id="delete-comment" ><i class="bi bi-trash"></i></a>
                                                         </c:if>
                                                     </a>
                                                 </i>
@@ -90,12 +92,12 @@
                                         </div>
                                         
                                         <div class="insights">
-                                            <a onclick="likeInsight(this)" href="javascript:void(0);" class="like">
-                                                <i class="bi bi-hand-thumbs-up"></i><span class="likeInsight">${comment.getLikeCount()}</span>
+                                            <a onclick="commentLike(this)" href="javascript:void(0);" class="like">
+                                                <i class="bi bi-hand-thumbs-up"></i><span id="comment-like" class="likeInsight">${comment.getLikeCount()}</span>
                                             </a>
 
-                                            <a href="comments?post-date=${post.getPostedDate()}&title=${post.getTitle()}" class="dislike">
-                                                <i class="bi bi-hand-thumbs-down"></i> <span class="dislikeInsight">${comment.getDislikeCount()}</span>
+                                            <a onclick="commentDislike(this)" class="dislike">
+                                                <i class="bi bi-hand-thumbs-down"></i> <span id="comment-dislike" class="dislikeInsight">${comment.getDislikeCount()}</span>
                                             </a>
                                         </div>
                                         
@@ -106,11 +108,7 @@
                      </ul>
                  </div>
                  
-            <c:if test="${comments.size() == 5}">
-                    <div class="container">
-                        <a class="see-more" href="javascript:void(0);" onclick="seeMore()" >see more</a>
-                    </div>
-            </c:if>
+            
         </c:when>  
         <c:otherwise>
             <div class="container">
@@ -126,9 +124,9 @@
     <c:if test="${user != null}">                          
         
         <div class="container">
-            <form id="add-comment-form" action="comment-action" class="add-comment" method="post">
+            <form id="add-comment-form" action="comment-action" class="add-comment">
                 <input type="hidden" name="action" value="add">
-                <input type="hidden" name="date" value="${post.getPostedDate()}">
+                <input type="hidden" name="post-date" value="${post.getPostedDate()}">
                 <input type="hidden" name="title" value="${post.getTitle()}">
                 <textarea name="content" cols="73" rows="7" required placeholder="Your comment..."></textarea>
                 <input class="add-comment-btn" type="submit" value="Add">
@@ -138,7 +136,6 @@
         
     </c:if>  
 
-<script src="javascript/comments.js"></script>
 <script src="javascript/insight.js"></script>
 <script src="javascript/readMore.js"></script>
 

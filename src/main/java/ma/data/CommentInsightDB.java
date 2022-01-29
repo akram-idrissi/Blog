@@ -109,17 +109,20 @@ public class CommentInsightDB{
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
-            rs.next();
-            return new Commentinsight(
-                    rs.getInt(1),
-                    UserDB.getUser("select * from user where id = " + rs.getInt(2)),
-                    PostDB.getPost("select * from post where id = " + rs.getInt(3)),
-                    CommentDB.getComment("select * from comment where id = " + rs.getInt(4)),
-                    rs.getInt(5),
-                    rs.getInt(6),
-                    rs.getInt(7),
-                    rs.getString(8)
-            );
+            if(rs.next()){
+                return new Commentinsight(
+                        rs.getInt(1),
+                        UserDB.getUser("select * from user where id = " + rs.getInt(2)),
+                        PostDB.getPost("select * from post where id = " + rs.getInt(3)),
+                        CommentDB.getComment("select * from comment where id = " + rs.getInt(4)),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8)
+                );
+            } else{
+                return null;
+            }
 
 
         } catch (SQLException ex) {
