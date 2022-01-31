@@ -17,7 +17,7 @@
     <div class="header">
         <div class="container">
             <div class="header-links">
-                <a href="home-posts" id="logo">JEE Blog</a>
+                <a href="home" id="logo">JEE Blog</a>
                 
                 <c:choose>
                     <c:when test="${user == null}">

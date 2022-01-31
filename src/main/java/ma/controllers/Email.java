@@ -26,7 +26,6 @@ public class Email extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        String url = TO_PASSWORD_RESET;
         String code = PasswordUtil.generateToken();
         String email = request.getParameter("email");
         String subject = "Verification link to reset your password";
@@ -51,7 +50,6 @@ public class Email extends HttpServlet {
         } 
         
         else{
-            url = TO_DONE;
             Verifypassword vp = new Verifypassword();
             
             User user = UserDB.getUser(emailQuery);
@@ -67,6 +65,6 @@ public class Email extends HttpServlet {
             
         }
         
-        response.sendRedirect(url);
+        response.sendRedirect(TO_PASSWORD_RESET);
     }
 }

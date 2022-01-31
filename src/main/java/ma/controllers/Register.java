@@ -29,7 +29,6 @@ public class Register extends HttpServlet {
         
         
         String[] fields;
-        String url = TO_REGISTER;
         String subject = "Email verification"; 
         HttpSession session = request.getSession();
         String code = PasswordUtil.generateToken();
@@ -91,7 +90,6 @@ public class Register extends HttpServlet {
         
         // If the credentials are valid
         else{
-            url = TO_DONE;
             Methods.setMessageInfo(request, EMAIL_VERIF, "block", "done-message");
             MailUtilGmail.sendMail(email, subject, body, false);
 
@@ -116,7 +114,7 @@ public class Register extends HttpServlet {
 
         }
         
-        response.sendRedirect(url);
+        response.sendRedirect(TO_REGISTER);
     }
     
 }
