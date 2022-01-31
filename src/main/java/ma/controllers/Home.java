@@ -14,7 +14,7 @@ import ma.business.Post;
 import static ma.constants.Page.*;
 
 
-public class HomePosts extends HttpServlet {
+public class Home extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

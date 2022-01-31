@@ -30,13 +30,13 @@ public class VerifyPassword extends HttpServlet {
         
         if (vp.getCode().compareTo(code) == 0){
             vp.setFlag(1);
-            url = TO_PASS_RESET;
+            url = TO_PASSWORD_RESET_CONFIRM;
             VerifyPasswordDB.update(vp);
             VerifyPasswordDB.delete(vp);
         }
         else{
-            url = TO_PASS_ERR;
-            Methods.setMessageInfo(response, request, PASS_RESET_ERR, false);
+            url = TO_PASSWORD_RESET;
+            Methods.setMessageInfo(request, PASS_RESET_ERR, "block", "error-message");
         }
         
         response.sendRedirect(url);

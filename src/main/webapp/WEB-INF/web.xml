@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>blog app</display-name>
-    <!--servlet-->
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>ma.controllers.Login</servlet-class>
@@ -43,8 +42,8 @@
         <servlet-class>ma.controllers.ResetPassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomePosts</servlet-name>
-        <servlet-class>ma.controllers.HomePosts</servlet-class>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>ma.controllers.Home</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Profile</servlet-name>
@@ -54,7 +53,6 @@
         <servlet-name>PostInsights</servlet-name>
         <servlet-class>ma.controllers.PostInsights</servlet-class>
     </servlet>
-    
     <!-- Servlet Mapping -->
     <servlet>
         <servlet-name>Comments</servlet-name>
@@ -67,6 +65,10 @@
     <servlet>
         <servlet-name>CommentInsights</servlet-name>
         <servlet-class>ma.controllers.CommentInsights</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentInter</servlet-name>
+        <servlet-class>ma.controllers.CommentInter</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -109,8 +111,8 @@
         <url-pattern>/reset-password</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomePosts</servlet-name>
-        <url-pattern>/home-posts</url-pattern>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
@@ -126,14 +128,18 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CommentActions</servlet-name>
-        <url-pattern>/comment-action</url-pattern>
+        <url-pattern>/comment-actions</url-pattern>
     </servlet-mapping>
-    <!-- welcome files -->
     <servlet-mapping>
         <servlet-name>CommentInsights</servlet-name>
-        <url-pattern>/comment-insight</url-pattern>
+        <url-pattern>/comment-insights</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentInter</servlet-name>
+        <url-pattern>/comment-inter</url-pattern>
+    </servlet-mapping>
+    <!-- welcome files -->
     <welcome-file-list>
-        <welcome-file>home-posts</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
 </web-app>

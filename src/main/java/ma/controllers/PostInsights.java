@@ -23,13 +23,11 @@ public class PostInsights extends HttpServlet {
         
         HttpSession session = request.getSession();
         
-        String date = request.getParameter("date");
-        String title = request.getParameter("title");
+        String id = request.getParameter("post-id");    
         String action = request.getParameter("action");
         
         // getting the dis/liked post 
-        String postQuery = String.format("select * from Post where posted_date = '%s' and title = '%s' ", date, title);
-        Post post = PostDB.getPost(postQuery);
+        Post post = PostDB.getPost("select * from Post where id = " + id);
 
         // if the user who clicked the dis/like is logged in
         if(session.getAttribute("user") != null){

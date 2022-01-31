@@ -14,16 +14,15 @@ import ma.data.CommentDB;
 import ma.business.Comment;
 
 import static ma.constants.Page.*;
-        
 
-public class Comments extends HttpServlet {
-    
-    
+
+public class CommentInter extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String id = request.getParameter("post-id");
+        
+        int id = (int) request.getSession().getAttribute("post-id");
         Post post = PostDB.getPost("select * from post where id = " + id);
         ArrayList<Comment> comments = CommentDB.getAll(String.format("select * from comment where post_id = %d order by id desc", post.getId()));
         

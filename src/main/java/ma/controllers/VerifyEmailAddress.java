@@ -32,9 +32,8 @@ public class VerifyEmailAddress extends HttpServlet {
         
         // If the code is empty
         if(code.equals("")){
-            System.out.println("break here 1");
             url = TO_REGISTER;
-            Methods.setMessageInfo(null, request, NONE, false);
+            Methods.setMessageInfo(request, NONE, "none", "error-message");
             
         } else{
             User user = UserDB.getUser(emailQuery);
@@ -42,10 +41,8 @@ public class VerifyEmailAddress extends HttpServlet {
 
             // If user and code exist
             if(ve.getCode().compareTo(code) != 0){
-                System.out.println("break here 2");
                 url = TO_REGISTER;
-                Methods.setMessageInfo(null, request, NONE, false);
-                
+                Methods.setMessageInfo(request, NONE, "none", "error-message");
                 
             }else{
                 url = TO_LOGIN;
@@ -56,7 +53,7 @@ public class VerifyEmailAddress extends HttpServlet {
                 VerifyEmailDB.update(ve);
                 UserDB.update(user);
                 request.getSession().removeAttribute("user-email");
-                Methods.setMessageInfo(null, request, NONE, false);
+                Methods.setMessageInfo(request, REGISTRED, "block", "done-message");
             }
 
         }

@@ -11,10 +11,10 @@ import ma.data.UserDB;
 import ma.data.PostDB;
 import ma.business.Post;
 import ma.business.User;
-import ma.business.Comment;
+import ma.data.CommentDB;
 
 import static ma.constants.Page.*;
-import ma.data.CommentDB;
+
 
 public class PostActions extends HttpServlet {
 
@@ -23,7 +23,6 @@ public class PostActions extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        String url;
         HttpSession session = request.getSession();
 
         String action = request.getParameter("action");
@@ -33,22 +32,17 @@ public class PostActions extends HttpServlet {
         
         switch (action) {
             case "add" -> {
-                url = TO_HOME_S;
                 addPost(request, user);
             }
             case "update" -> {
-                url = TO_HOME_S;
                 updatePost(request);
             }
             case "delete" -> {
-                url = TO_HOME_S;
                 deletePost(request, user);
             }
-            default -> url = TO_HOME_S;
         }
         
-        response.sendRedirect(url);
-        
+        response.sendRedirect(TO_HOME_S);
     }
     
     public void addPost(HttpServletRequest req, User user){
@@ -67,8 +61,8 @@ public class PostActions extends HttpServlet {
     
     public void updatePost(HttpServletRequest req){
         HttpSession session = req.getSession();
-        Post post = (Post) session.getAttribute("post");
         String title = req.getParameter("title").trim();
+        Post post = (Post) session.getAttribute("post");
         String content = req.getParameter("content").trim();
 
         post.setTitle(title);

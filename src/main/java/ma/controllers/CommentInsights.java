@@ -24,25 +24,21 @@ public class CommentInsights extends HttpServlet {
         
         HttpSession session = request.getSession();
         
-        String date = request.getParameter("date");
+        String id = request.getParameter("comment-id");
         String action = request.getParameter("action");
         
         // getting the dis/liked comment 
-        String commentQuery = String.format("select * from comment where comment_date = '%s'", date);
-        System.out.println(commentQuery);
-        Comment comment = CommentDB.getComment(commentQuery);
+        Comment comment = CommentDB.getComment("select * from comment where id = " + id);
 
         // if the user who clicked the dis/like is logged in
         if(session.getAttribute("user") != null){
 
             // getting the user object of the current user
             int userID = (int) session.getAttribute("user");
-            String userQuery = String.format("select * from User where id = %d", userID);
-            User user = UserDB.getUser(userQuery);
+            User user = UserDB.getUser("select * from User where id = " + userID);
             
             // query for commentInsight of the comment that has been dis/liked
             String insightQuery = String.format("select * from commentinsight where user_id = %d and comment_id = %d order by id desc", userID, comment.getId());
-            System.out.println(insightQuery);
             Commentinsight commentI = CommentInsightDB.getCommentIsg(insightQuery);
             
             int likeCount = comment.getLikeCount();
@@ -142,7 +138,6 @@ public class CommentInsights extends HttpServlet {
             }
             
         } 
-
         response.getWriter().write(comment.getLikeCount() + "," + comment.getDislikeCount());
         
     }

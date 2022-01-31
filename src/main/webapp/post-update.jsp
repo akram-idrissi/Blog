@@ -1,16 +1,5 @@
-<jsp:include page="includes/startHtml.jsp" /> 
-<jsp:include page="includes/homeHeader.jsp" /> 
-<jsp:include page="includes/sideBar.jsp" /> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
-    <!-- if someone attempts to access this page without having permission(log in) -->
-    <%
-        session = request.getSession();
-        if (session.getAttribute("user") == null){
-            response.sendRedirect("login.jsp");
-        }
-    %>
-    
+<jsp:include page="includes/startHtml.jsp" /> 
     <div class="container">
         <div class="update-post">
             <div class="padding">
@@ -28,5 +17,10 @@
             </div>
         </div>
     </div>
-    
 <jsp:include page="includes/endHtml.jsp" />
+<%
+    session = request.getSession();
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>

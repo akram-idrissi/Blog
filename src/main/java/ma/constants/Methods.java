@@ -1,16 +1,11 @@
 
 package ma.constants;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import ma.util.PasswordUtil;
-import ma.controllers.Register;
 
 
 public final class Methods {
@@ -39,18 +34,10 @@ public final class Methods {
         return matcher.matches();
     }
     
-    public final static void setMessageInfo(HttpServletResponse res, HttpServletRequest req, String message, boolean b){
+    public static void setMessageInfo(HttpServletRequest req, String message, String style, String cssClass){
+        req.getSession().setAttribute("cssClass", cssClass);
         req.getSession().setAttribute("message", message);
-        
-        try {
-            if(res != null)
-                if(b)
-                    res.getWriter().write("valide");
-                else
-                    res.getWriter().write("error");
-        } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        req.getSession().setAttribute("style", style);
     }
     
     public static String verifyHash(String pass, String salt, String hashed){

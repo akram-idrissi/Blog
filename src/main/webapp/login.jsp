@@ -1,14 +1,6 @@
 <jsp:include page="includes/startHtml.jsp" /> 
-<jsp:include page="includes/header.jsp" /> 
-<jsp:include page="includes/sideBar.jsp" /> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-    <div class="container">
-        <div class="message">
-            <p class="error-message">${message}</p>
-        </div>
-    </div> 
-        
+<jsp:include page="message.jsp" /> 
     <div class="container">
         <div class="login">
             <div class="padding">
@@ -22,7 +14,7 @@
                     <input type="password" name="password" placeholder=""><br>
 
                     <input type="submit" value="Login">
-                    <a href="request-pass-reset.jsp">Forgot Password?</a>
+                    <a href="password-reset.jsp">Forgot Password?</a>
                 </form>
             </div>
         </div>

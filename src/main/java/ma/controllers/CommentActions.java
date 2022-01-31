@@ -26,12 +26,11 @@ public class CommentActions extends HttpServlet {
         
         HttpSession session = request.getSession();
         
-        String date = request.getParameter("post-date");
-        String title = request.getParameter("title");
+        String id = request.getParameter("post-id");
         String action = request.getParameter("action");
         
+        Post post = PostDB.getPost("select * from post where id = " + id);
         User user = UserDB.getUser("select * from User where id = " + (int) session.getAttribute("user"));
-        Post post = PostDB.getPost(String.format("select * from post where posted_date = '%s' and title = '%s'", date, title));
         
         if(user != null){
             switch (action) {
@@ -44,22 +43,20 @@ public class CommentActions extends HttpServlet {
                 case "delete" -> {
                     deleteComment(request, post);
                 }
-                default -> {
-
-                }
             }
-            request.getRequestDispatcher("comments").forward(request, response);
+            
+            session.setAttribute("post-id", post.getId());
+            response.sendRedirect("comment-inter");
             
         } else{
             response.sendRedirect(TO_HOME_S);
         }
-       
     }
 
     private void addComment(HttpServletRequest request, User user, Post post) {
-        String content = request.getParameter("content").trim();
-
         Comment comment = new Comment();
+        String content = request.getParameter("content").trim();
+        
         comment.setUser(user);
         comment.setPost(post);
         comment.setLikeCount(0);
@@ -72,17 +69,14 @@ public class CommentActions extends HttpServlet {
     }
 
     private void updateComment(HttpServletRequest request) {
-        
-        
-    
     }
 
     private void deleteComment(HttpServletRequest request, Post post) {
-        String date = request.getParameter("comment-date");
-        String query = String.format("delete from comment where comment_date = '%s' ", date);
+        String id = request.getParameter("comment-id");
+        String query = "delete from comment where id = " + id;
+        
         CommentDB.delete(query);
         post.setCommentCount(post.getCommentCount() - 1);
         PostDB.update(post);
     }
-
 }

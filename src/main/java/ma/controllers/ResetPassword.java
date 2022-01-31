@@ -25,7 +25,7 @@ public class ResetPassword extends HttpServlet {
             throws ServletException, IOException {
         
         User user;
-        
+        String url = TO_PASSWORD_RESET_CONFIRM;
         HttpSession session = request.getSession();
 
         int userId = (int) session.getAttribute("user-non-valid-id");
@@ -35,31 +35,32 @@ public class ResetPassword extends HttpServlet {
         String confirm = request.getParameter("new-confirm");
         
         if (Methods.any(new String[]{pass, confirm})){
-            Methods.setMessageInfo(response, request, EMPTY, false);
+            Methods.setMessageInfo(request, EMPTY, "block", "error-message");
         }
         else if (!Methods.isPassword(pass)){
-            Methods.setMessageInfo(response, request, PASS_ERR, false);
+            Methods.setMessageInfo(request, PASS_ERR, "block", "error-message");
         }
         else{
             if (pass.equals(confirm)){
-                Methods.setMessageInfo(null, request, NONE, true);
+                url = TO_LOGIN;
+                Methods.setMessageInfo(request, PASS_RESET_SUCCESS, "block", "done-message");
                 
                 String salt = PasswordUtil.getSalt();
                 String hash = PasswordUtil.hashPassword(pass + salt);
                 
-                user.setSalt(salt);
                 user.setHashedpass(hash);
+                user.setSalt(salt);
                 UserDB.update(user);
                 
                 session.removeAttribute("message");
                 session.removeAttribute("user-non-valid-id");
-                response.sendRedirect(TO_LOGIN);
+                
             }
             else{
-                Methods.setMessageInfo(response, request, CONFPASS_ERR, false);
+                Methods.setMessageInfo(request, CONFPASS_ERR, "block", "error-message");
             }
         }
         
-        
+        response.sendRedirect(url);
     }
 }

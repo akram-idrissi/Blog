@@ -26,6 +26,7 @@ public class Email extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
+        String url = TO_PASSWORD_RESET;
         String code = PasswordUtil.generateToken();
         String email = request.getParameter("email");
         String subject = "Verification link to reset your password";
@@ -41,15 +42,16 @@ public class Email extends HttpServlet {
         
         // If the email input is empty
         if (Methods.any(new String[]{email})){
-            Methods.setMessageInfo(response, request, EMPTY, false);
+            Methods.setMessageInfo(request, EMPTY, "block", "error-message");
         } 
         
         // If the emial address doesn not exist
         else if(UserDB.getUser(emailQuery) == null){
-            Methods.setMessageInfo(response, request, EMAIL_ERR, false);
+            Methods.setMessageInfo(request, EMAIL_ERR, "block", "error-message");
         } 
         
         else{
+            url = TO_DONE;
             Verifypassword vp = new Verifypassword();
             
             User user = UserDB.getUser(emailQuery);
@@ -61,9 +63,10 @@ public class Email extends HttpServlet {
             VerifyPasswordDB.insert(vp);
             
             MailUtilGmail.sendMail(email, subject, body, false);
-            Methods.setMessageInfo(response, request, EMAIL_PASS_RESET, true);
-            response.sendRedirect(TO_DONE);
+            Methods.setMessageInfo(request, EMAIL_PASS_RESET, "block", "done-message");
+            
         }
         
+        response.sendRedirect(url);
     }
 }

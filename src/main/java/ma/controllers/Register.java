@@ -29,6 +29,7 @@ public class Register extends HttpServlet {
         
         
         String[] fields;
+        String url = TO_REGISTER;
         String subject = "Email verification"; 
         HttpSession session = request.getSession();
         String code = PasswordUtil.generateToken();
@@ -55,42 +56,43 @@ public class Register extends HttpServlet {
 
         // If any input is empty 
         if(Methods.any(fields)){ 
-            Methods.setMessageInfo(response, request, EMPTY, false);
+            Methods.setMessageInfo(request, EMPTY, "block", "error-message");
         }
         
         // If the username exists 
         else if(UserDB.getUser(usernameQuery) != null){
-            Methods.setMessageInfo(response, request, USN_EXISTS, false);
+            Methods.setMessageInfo(request, USN_EXISTS, "block", "error-message");
         }
         
         // If the username do not respect name conditions
         else if(!Methods.usernameRules(username)){
-            Methods.setMessageInfo(response, request, USN_ERR, false);
+            Methods.setMessageInfo(request, USN_ERR, "block", "error-message");
         }
         
         // If the email exists 
         else if(UserDB.getUser(emailQuery) != null){
-            Methods.setMessageInfo(response, request, EMAIL_EXISTS, false);
+            Methods.setMessageInfo(request, EMAIL_EXISTS, "block", "error-message");
         }
         
         // If the password is not strong enough 
         else if (!Methods.isPassword(password)){
-            Methods.setMessageInfo(response, request, PASS_ERR, false);
+            Methods.setMessageInfo(request, PASS_ERR, "block", "error-message");
         }
         
         // If the password contains personal info (username) 
         else if (password.contains(username)){
-            Methods.setMessageInfo(response, request, PASS_ERR, false);
+            Methods.setMessageInfo(request, PASS_ERR, "block", "error-message");
         }
         
         // If the password and the confirm are not the same
         else if (!password.equals(confirmPassword)){
-            Methods.setMessageInfo(response, request, CONFPASS_ERR, false);
+            Methods.setMessageInfo(request, CONFPASS_ERR, "block", "error-message");
         }
         
         // If the credentials are valid
         else{
-            Methods.setMessageInfo(null, request, EMAIL_VERIF, true);
+            url = TO_DONE;
+            Methods.setMessageInfo(request, EMAIL_VERIF, "block", "done-message");
             MailUtilGmail.sendMail(email, subject, body, false);
 
             User user = new User();
@@ -99,7 +101,6 @@ public class Register extends HttpServlet {
             ve.setFlag(0); // The user has not verify its email yet
             ve.setCode(code);
             ve.setEmail(email);
-            
             user.setValide(0); // Not a valid user
             user.setSalt(salt);
             user.setEmail(email);
@@ -111,10 +112,11 @@ public class Register extends HttpServlet {
             VerifyEmailDB.insert(ve);
             
             session.setAttribute("user-email", user.getEmail());
-            response.sendRedirect(TO_DONE);
+            
 
         }
         
+        response.sendRedirect(url);
     }
     
 }

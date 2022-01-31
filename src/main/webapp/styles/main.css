@@ -6,6 +6,7 @@
 }
 
 body{
+    overflow-x: hidden;
     background-color: #faf9fa;
 }
 
@@ -23,13 +24,13 @@ body{
     display: none;
 }
 
+.hidden-menu{
+    display: none;
+}
+
 .comments-link{
     color: #007bff;
     font-size: 12px;
-}
-
-.about-title{
-    margin-top: 20px;
 }
 
 hr{
@@ -69,7 +70,6 @@ a:hover{
 
 .insights{
     float: right;
-    margin-top: 11px;
 }
 
 .insights span{
@@ -171,9 +171,10 @@ input[type=password]:focus{
 }
 
 textArea{
+    width: 100%;
     resize: none;
-    margin-top: 5px;
     padding: 10px;
+    margin-top: 5px;
     border-radius: 5px;
     margin-bottom: 20px;
     border: 0.5px solid #e9e8e9;
@@ -193,12 +194,11 @@ textArea:focus{
 }
 
 .message{
-    width: 550px;
-    margin-top: 20px;
+    width: 64%;
 }
 
 .done-message{
-    display: block;
+    display: none;
     color: #0c5460;
     padding: 0.75rem 1%;
     border-color: #bee5eb;
@@ -210,7 +210,7 @@ textArea:focus{
 }
 
 .error-message{
-    display: block;
+    display: none;
     color: #721c24;
     padding: 0.75rem 1%;
     border-color: #f5c6cb;
@@ -225,13 +225,22 @@ textArea:focus{
 
 /* start header */
 .header{
+    width: 100%;
+    margin-bottom: 20px;
     background-color: #556e80;
 }
 
 .header-links{
+    width: 100%;
     height: 50px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+#links{
+    width: 100%;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -253,14 +262,24 @@ textArea:focus{
     color: #b5bbc0;
     padding-right: 10px;
 }
+
+#logo{
+    display: inline-block;
+    width: 130px;
+    color: #b5bbc0;
+    font-size: 22px;
+}
+
+#menu{
+    display: none;
+}
 /* end header */
 
 
 /* start side bar */
 .side-bar{
-    width: 266px;
+    width: 31%;
     float: right;
-    margin-top: 20px;
     background-color: #fff;
     border: 1.5px solid #efeeef;
 }
@@ -289,8 +308,9 @@ textArea:focus{
 
 /* start post page */
 .post{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
+    margin-bottom: 20px;
+    display: inline-block;
     list-style-type: none;
     background-color: #fff;
     border: 0.5px solid #efeeef;
@@ -344,8 +364,7 @@ textArea:focus{
 
 /* start profile page */
 .profile{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
     list-style-type: none;
     background-color: #fff;
     border: 0.5px solid #efeeef;
@@ -413,8 +432,8 @@ textArea:focus{
 
 /* start log in page */
 .login{
-    width: 550px;
-    margin: 20px 0 10px 0;
+    width: 64%;
+    margin: 0 0 10px 0;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -442,7 +461,7 @@ textArea:focus{
 }
 
 .sigin{
-    width: 550px;
+    width: 64%;
 }
 
 .sigin hr{
@@ -471,8 +490,8 @@ textArea:focus{
 
 /* start register page */
 .register{
-    width: 550px;
-    margin: 20px 0 10px 0;
+    width: 64%;
+    margin: 0 0 10px 0;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -516,7 +535,7 @@ textArea:focus{
 }
 
 .signup{
-    width: 550px;
+    width: 64%;
 }
 
 .signup hr{
@@ -545,8 +564,7 @@ textArea:focus{
 
 /* start add post page */
 .new-post{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -564,8 +582,7 @@ textArea:focus{
 
 /* start update post page */
 .update-post{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -583,8 +600,7 @@ textArea:focus{
 
 /* start delete post page */
 .delete-post{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -622,17 +638,18 @@ textArea:focus{
     background-color: #FF0000;
 }
 
-.confirmation-buttons button:nth-of-type(2){
+#cancel{
     color: #6c757d;
     padding: 6px 10px;
     border-radius: 3px;
+    text-decoration: none;
     border: 0.5px solid #6c757d;
     background-color: transparent;
 
     transition: 0.3s;
 }
 
-.confirmation-buttons button:nth-of-type(2):hover{
+#cancel:hover{
     color: #fff;
     background-color: #6c757d;
 }
@@ -683,12 +700,13 @@ textArea:focus{
 }
 
 .comments{
-    width: 550px;
+    width: 64%;
     margin-top: 20px;
+    display: inline-block;
 }
 
 .comment-page{
-    width: 550px;
+    width: 64%;
     margin: 20px 0;
     list-style: none;
     background-color: #fff;
@@ -753,7 +771,7 @@ textArea:focus{
 }
 
 .line{
-    width: 550px;
+    width: 64%;
 }
 
 .add-comment-btn{
@@ -774,7 +792,7 @@ textArea:focus{
 }
 
 .add-comment{
-    width: 550px;
+    width: 64%;
     margin: 190px 0 50px 0;
 }
 
@@ -790,8 +808,8 @@ textArea:focus{
 
 /* start logout page */
 .logout{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
+    margin-bottom: 20px;
 }
 
 .logout hr{
@@ -817,8 +835,8 @@ textArea:focus{
 
 /* start request pass reset page */
 .reset-pass-request{
-    width: 550px;
-    margin: 20px 0 10px 0;
+    width: 64%;
+    margin: 0 0 10px 0;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -837,8 +855,8 @@ textArea:focus{
 
 /* start pass reset page */
 .reset-password{
-    width: 550px;
-    margin: 20px 0 10px 0;
+    width: 64%;
+    margin: 0 0 10px 0;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -875,8 +893,7 @@ textArea:focus{
 
 /*start add comment*/
 .new-comment{
-    width: 550px;
-    margin: 20px 0;
+    width: 64%;
     background-color: #fff;
     border: 0.5px solid #efeeef;
 }
@@ -893,7 +910,7 @@ textArea:focus{
 
 /* start pagination*/
 .home-pagination{
-    width: 550px;
+    width: 64%;
     cursor: pointer;
     margin-top: 30px;
     text-align: center;
@@ -920,3 +937,80 @@ textArea:focus{
     border: 0.5px solid #17a2b8;
 }
 /* end pagination*/
+
+@media (max-width: 1000px) { 
+
+    .container{
+        width: 90%;
+    }
+
+    .header-links{
+        width: 100%;
+        display: block;
+        position: relative;
+    }
+
+    .side-bar{
+        display: none;
+    }
+
+    #links{
+        background-color: #556e80;
+        padding-top: 100px;
+        position: absolute;
+        display: none;
+        height: 100vh;
+        width: 112%;
+        right: -118%;
+        z-index: 1;
+        top: 0;
+    }
+
+    #links a{
+        display: flex;
+        padding: 30px;
+        font-size: 30px;
+        justify-content: center;
+    }
+
+    #logo{
+        padding-top: 15px;
+        display: inline-block;
+    }
+
+    #menu{
+        top: 18px;
+        float: right;
+        display: flex;
+        flex-wrap: wrap;
+        cursor: pointer;
+        position: relative;
+    }
+
+    #menu span{
+        z-index: 2;
+        width: 100%;
+        height: 2px;
+        margin-bottom: 5px;
+        background-color: #b5bbc0;
+    }
+
+    .home-pagination, .new-comment ,
+    .reset-password, .reset-pass-request ,
+    .logout, .add-comment ,
+    .line, .comment-page,
+    .comments, .delete-post,
+    .update-post, .new-post,
+    .signup, .register,
+    .sigin, .login,
+    .message, .profile, .post{ width: 100%; }
+    
+}
+
+@media (max-width: 200px) { 
+    #logo{
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {  }

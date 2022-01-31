@@ -1,31 +1,8 @@
-//window.onload = function() {
-//    var xhttp = new XMLHttpRequest();
-//    
-//    posts = document.getElementsByClassName("post");
-//    
-//    for (var i = 0; i < posts.length; i++) {
-//    
-//        xhttp.onreadystatechange = function () {
-//            posts[i].querySelector(".likeInsight").innerHTML = this.responseText.split(",")[0];
-//            posts[i].querySelector(".dislikeInsight").innerHTML = this.responseText.split(",")[1];
-//        };
-//
-//        var date = posts[i].querySelector(".hidden-date").textContent;
-//        
-//        
-//        xhttp.open("GET", "http://localhost:8090/blog/post-insights?date=" + date, false);
-//        xhttp.send();
-//        
-//    }
-//};
-
 function likeInsight(icon){
     let insight = icon.parentElement;
     let postDesc = insight.parentElement;
     let post = postDesc.parentElement;
-    let date = post.querySelector(".hidden-date").textContent;
-    let title = postDesc.getElementsByTagName("h2")[0].textContent;
-    
+    let id = post.querySelector(".post-hidden-id").textContent;
     
     let likeIcon = insight.querySelector(".like");
     let dislikeIcon = insight.querySelector(".dislike");
@@ -40,7 +17,7 @@ function likeInsight(icon){
         }
      };    
     
-    xhttp.open("GET", `http://localhost:8090/blog/post-insights?action=like&date=${date}&title=${title}`, true);
+    xhttp.open("GET", `http://localhost:8090/blog/post-insights?action=like&post-id=${id}`, true);
     xhttp.send();
     
 };
@@ -49,8 +26,7 @@ function dislikeInsight(icon){
     let insight = icon.parentElement;
     let postDesc = insight.parentElement;
     let post = postDesc.parentElement;
-    let date = post.querySelector(".hidden-date").textContent;
-    let title = postDesc.getElementsByTagName("h2")[0].textContent;
+    let id = post.querySelector(".post-hidden-id").textContent;
     
     let likeIcon = insight.querySelector(".like");
     let dislikeIcon = insight.querySelector(".dislike");
@@ -65,7 +41,7 @@ function dislikeInsight(icon){
         }
      };    
     
-    xhttp.open("GET", `http://localhost:8090/blog/post-insights?action=dislike&date=${date}&title=${title}`, true);
+    xhttp.open("GET", `http://localhost:8090/blog/post-insights?action=dislike&post-id=${id}`, true);
     xhttp.send();
     
 };
@@ -77,7 +53,8 @@ function commentLike(icon){
     
     let insight = icon.parentElement;
     let commentBody = insight.parentElement;
-    let date = commentBody.querySelector(".comment-hidden-date").textContent;
+    let id = commentBody.querySelector(".comment-hidden-id").textContent;
+    console.log(id);
     
     var xhttp = new XMLHttpRequest();
     
@@ -85,12 +62,12 @@ function commentLike(icon){
         
         if(this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
-            document.getElementById("comment-like").innerHTML = this.responseText.split(",")[0];
-            document.getElementById("comment-dislike").innerHTML = this.responseText.split(",")[1];
+            insight.querySelector("#comment-like").innerHTML = this.responseText.split(",")[0];
+            insight.querySelector("#comment-dislike").innerHTML = this.responseText.split(",")[1];
         }
      };    
     
-    xhttp.open("GET", `http://localhost:8090/blog/comment-insight?action=like&date=${date}`, true);
+    xhttp.open("GET", `http://localhost:8090/blog/comment-insights?action=like&comment-id=${id}`, true);
     xhttp.send();
 };
 
@@ -98,7 +75,8 @@ function commentDislike(icon){
     
     let insight = icon.parentElement;
     let commentBody = insight.parentElement;
-    let date = commentBody.querySelector(".comment-hidden-date").textContent;
+    let id = commentBody.querySelector(".comment-hidden-id").textContent;
+    console.log(id);
     
     var xhttp = new XMLHttpRequest();
     
@@ -106,11 +84,11 @@ function commentDislike(icon){
         
         if(this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
-            document.getElementById("comment-like").innerHTML = this.responseText.split(",")[0];
-            document.getElementById("comment-dislike").innerHTML = this.responseText.split(",")[1];
+            insight.querySelector("#comment-like").innerHTML = this.responseText.split(",")[0];
+            insight.querySelector("#comment-dislike").innerHTML = this.responseText.split(",")[1];
         }
      };    
     
-    xhttp.open("GET", `http://localhost:8090/blog/comment-insight?action=dislike&date=${date}`, true);
+    xhttp.open("GET", `http://localhost:8090/blog/comment-insights?action=dislike&comment-id=${id}`, true);
     xhttp.send();
 };

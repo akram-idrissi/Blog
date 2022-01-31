@@ -23,24 +23,14 @@ public class PostDetail extends HttpServlet {
         
         String url;
         HttpSession session = request.getSession();
-        String title = request.getParameter("title");    
-        String date = request.getParameter("post-date");    
-        String postQuery = String.format("select * from Post where posted_date = '%s' and title = '%s'", date, title);
+        String id = request.getParameter("post-id");    
         
         // getting the post with the specific date
-        Post post = (Post) PostDB.getPost(postQuery);
+        Post post = (Post) PostDB.getPost("select * from Post where id = " + id);
         
         if(post != null){
             session.setAttribute("post", post);
-            if (session.getAttribute("user") == null) {
-                url = TO_POST;
-            } else if ((int) session.getAttribute("user") != post.getUser().getId()) {
-                url = TO_POST;
-            } else {
-                url = TO_USER_POST;
-                session.setAttribute("post", post);
-                session.setAttribute("title", post.getTitle());
-            }
+            url = TO_POST_DETAIL;
         
         } else{
             url = TO_HOME_S;

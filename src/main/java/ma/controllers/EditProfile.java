@@ -4,7 +4,6 @@ package ma.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import com.google.gson.Gson;
 import javax.servlet.http.Part;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,11 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.MultipartConfig;
+import java.util.concurrent.TimeUnit;
 
 import ma.data.UserDB;
 import ma.business.User;
 import ma.constants.Methods;
 
+import static ma.constants.Page.*;
 import static ma.constants.InfoMSG.*;
 
 
@@ -47,15 +48,17 @@ public class EditProfile extends HttpServlet {
         boolean saved = saveImage(part.getInputStream(), newImage);
         
         if(saved)
-            Methods.setMessageInfo(response, request, PROFILE, true);
+            Methods.setMessageInfo(request, PROFILE, "block", "done-message");
         else
-            Methods.setMessageInfo(response, request, PROFILE_ERR, false);
+            Methods.setMessageInfo(request, PROFILE_ERR, "block", "error-message");
         
-        String gson = new Gson().toJson(user);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(gson);
+        try {
+            TimeUnit.SECONDS.sleep(2); 
+        } catch (InterruptedException ex) {
+            Logger.getLogger(EditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        response.sendRedirect(TO_PROFILE_S);
     }
     
     public boolean saveImage(InputStream is, String path) throws IOException{

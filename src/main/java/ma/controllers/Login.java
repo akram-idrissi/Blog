@@ -16,14 +16,15 @@ import static ma.constants.Page.*;
 import static ma.constants.InfoMSG.*;
 
 public class Login extends HttpServlet {
+    
 
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         
+        String url = TO_LOGIN;
         HttpSession session = request.getSession();
-
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
         String[] fields = new String[]{username, password};
@@ -31,12 +32,12 @@ public class Login extends HttpServlet {
         
         // If any input is empty
         if (Methods.any(fields)) {
-            Methods.setMessageInfo(response, request, EMPTY, false);
+            Methods.setMessageInfo(request, EMPTY, "block", "error-message");
         } 
         
         // If the email do not exist
         else if (Objects.isNull(UserDB.getUser(usnQuery))){
-            Methods.setMessageInfo(response, request, USN_ERR, false);
+            Methods.setMessageInfo(request, USN_ERR, "block", "error-message");
         }
         else {
             User user = UserDB.getUser(usnQuery);
@@ -48,17 +49,16 @@ public class Login extends HttpServlet {
                 
                 // If the pass != hashDB show error msg else send user to home
                 if (Objects.isNull(Methods.verifyHash(password, saltDB, hashDB))) {
-                    Methods.setMessageInfo(response, request, PASS_ERR, false);
+                    Methods.setMessageInfo(request, PASS_ERR, "block", "error-message");
                     
                 } else {
-                    Methods.setMessageInfo(response, request, NONE, true);
+                    url = TO_HOME_S;
+                    Methods.setMessageInfo(request, NONE, "none", "done-message");
                     session.setAttribute("user", user.getId());
-                    
-                    response.sendRedirect(TO_HOME_S);
                 }
             }
         }
         
-        
+        response.sendRedirect(url);
     }
 }

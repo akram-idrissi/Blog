@@ -19,10 +19,8 @@ public class Profile extends HttpServlet {
         int userID = (int) request.getSession().getAttribute("user");
         User user = UserDB.getUser("select * from User where id = " + userID);
 
-        String gson = new Gson().toJson(user);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(gson);
+        request.setAttribute("userObj", user);
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
 }
