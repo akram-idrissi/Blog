@@ -39,9 +39,3 @@
         </div>
     </div>
 <jsp:include page="includes/endHtml.jsp" />
-<%
-    session = request.getSession();
-    if (session.getAttribute("user") == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>

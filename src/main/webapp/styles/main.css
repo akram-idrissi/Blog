@@ -772,6 +772,8 @@ textArea:focus{
 
 .line{
     width: 64%;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .add-comment-btn{

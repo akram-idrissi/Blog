@@ -164,31 +164,6 @@ public class CommentDB {
         
     }
     
-    public static long size(String query){
-        
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs;
-        
-        try {
-            ps = connection.prepareStatement(query);
-            rs = ps.executeQuery();
-            
-            if(rs.next()){
-                return rs.getLong(1);
-            } else{
-                return  0;
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(CommentDB.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        } finally {
-            DBUtil.closePreparedStatement(ps);
-            pool.freeConnection(connection);
-        }
-        
-    }
+    
     
 }

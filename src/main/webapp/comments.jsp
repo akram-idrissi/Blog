@@ -10,7 +10,7 @@
                         <span class="post-hidden-id" style="display: none">${post.getId()}</span>
                         <img src="images/${post.getUser().getImage()}" alt="profile image">
                         <div class="post-desc">
-                            <span class="username">${post.getUser().getUsername()}</span>
+                            <span class="username"><a href="user-posts?user-id=${post.getUser().getId()}">${post.getUser().getUsername()}</a></span>
 
                             <fmt:parseDate value="${post.getPostedDate()}" type="date" pattern="yyyy-MM-dd HH:mm:ss" var="fdate" />
                             <fmt:formatDate value="${fdate}" type="date" pattern="MMM dd, yyyy" var="string"/>
@@ -61,11 +61,11 @@
                         <fmt:parseDate value="${comment.getCommentDate()}" type="date" pattern="yyyy-MM-dd HH:mm:ss" var="fdate" />
                         <fmt:formatDate value="${fdate}" type="date" pattern="MMM d, yyyy" var="string"/>
 
-                        <p class="meta">${string}&#160&#160<a href="#">${comment.getUser().getUsername()}</a> says : 
+                        <p class="meta">${string}&#160&#160<a href="user-posts?user-id=${comment.getUser().getId()}">${comment.getUser().getUsername()}</a> says : 
                             <i class="pull-right">
-                                <a href="#">
+                                <a href="javascipt:void(0);">
                                     <c:if test="${comment.getUser().getId() == user}">
-                                        <a href="comment-actions?action=update&post-id=${post.getId()}&comment-id=${comment.getId()}" id="update-comment"><i class="bi bi-arrow-repeat"></i></a>
+                                        <a href="comment-actions?action=update&post-id=${post.getId()}&comment-id=${comment.getId()}" id="update-comment"><i class="bi bi-pencil"></i></a>
                                         <a href="comment-actions?action=delete&post-id=${post.getId()}&comment-id=${comment.getId()}" id="delete-comment" ><i class="bi bi-trash"></i></a>
                                         </c:if>
                                 </a>

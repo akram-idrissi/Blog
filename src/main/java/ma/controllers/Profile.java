@@ -1,6 +1,5 @@
 package ma.controllers;
 
-import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +15,16 @@ public class Profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int userID = (int) request.getSession().getAttribute("user");
-        User user = UserDB.getUser("select * from User where id = " + userID);
-
-        request.setAttribute("userObj", user);
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
+        User user = new User();
+        if(request.getSession().getAttribute("user") != null){
+            int userID = (int) request.getSession().getAttribute("user");
+            user = UserDB.getUser("select * from User where id = " + userID);
+            request.setAttribute("userObj", user);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+        } else{
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
 }
