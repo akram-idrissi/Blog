@@ -6,8 +6,8 @@ public class User  implements java.io.Serializable {
     private Integer id;
     private String username;
     private String email;
-    private String hashedpass;
-    private String salt;
+    transient private String hashedpass;
+    transient private String salt;
     private String registerDate;
     private Integer valide;
     private String image;

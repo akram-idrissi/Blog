@@ -1,5 +1,6 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="includes/startHtml.jsp"/> 
 <c:if test="${posts != null}">
     <c:forEach var="post" items="${posts}">
@@ -11,7 +12,9 @@
                         <span class="post-hidden-id" style="display: none">${post.getId()}</span>
                         <img src="images/${post.getUser().getImage()}" alt="profile image">
                         <div class="post-desc">
-                            <span class="username"><a href="user-posts?user-id=${post.getUser().getId()}">${post.getUser().getUsername()}</a></span> 
+                            <span class="username">
+                                <a style="color: #007bff" href="user-posts?user-id=${post.getUser().getId()}">${post.getUser().getUsername()}</a>
+                            </span> 
                             <fmt:parseDate value="${post.getPostedDate()}" type="date" pattern="yyyy-MM-dd HH:mm:ss" var="fdate" />
                             <fmt:formatDate value="${fdate}" type="date" pattern="MMM dd, yyyy" var="string"/>
                             <span class="post-date">${string}</span>
@@ -24,6 +27,7 @@
 
                             <div class="insights">
                                 <a onclick="likeInsight(this)" href="javascript:void(0);" class="like">
+<!--                                    <i class="bi bi-hand-thumbs-up-fill"></i>-->
                                     <i class="bi bi-hand-thumbs-up"></i><span class="likeInsight">${post.getLikeCount()}</span>
                                 </a>
 
@@ -43,23 +47,24 @@
     </div>
     </c:forEach>
 </c:if>
-${page}
+
     <div class="container">
         <div class="home-pagination">
-            <c:forEach var="p" items="${pages}">
-                <c:choose>
-                    <c:when test="${page == null && p == 1}">
-                        <a class="current-page" href="home?page=${p}">${p}</a>
-                    </c:when>
-                    <c:when test="${page == p}">
-                        <a class="current-page" href="home?page=${p}">${p}</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="home?page=${p}">${p}</a>
-                    </c:otherwise>
-                </c:choose>
-
-            </c:forEach>
+            <c:if test="${fn:length(pages) > 1}">
+                <c:forEach var="p" items="${pages}">
+                    <c:choose>
+                        <c:when test="${page == null && p == 1}">
+                            <a class="current-page" href="home?page=${p}">${p}</a>
+                        </c:when>
+                        <c:when test="${page == p}">
+                            <a class="current-page" href="home?page=${p}">${p}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="home?page=${p}">${p}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
 

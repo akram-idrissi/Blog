@@ -58,7 +58,7 @@ public class PostActions extends HttpServlet {
         post.setContent(content);
         PostDB.insert(post);
     }
-    
+    // loading.io/css
     public void updatePost(HttpServletRequest req){
         HttpSession session = req.getSession();
         String title = req.getParameter("title").trim();

@@ -60,24 +60,25 @@
         </c:forEach>
     </c:otherwise>    
 </c:choose>
-${page}
+
     <div class="container">
         <div class="home-pagination">
-            <c:forEach var="p" items="${pages}">
-                <c:choose>
-                    <c:when test="${page == null && p == 1}">
-                        <a class="current-page" href="user-posts?user-id=${posts[0].getUser().getId()}&page=${p}">${p}</a>
-                    </c:when>
-                    <c:when test="${page == p}">
-                        ${p}
-                        <a class="current-page" href="user-posts?user-id=${posts[0].getUser().getId()}&page=${p}">${p}</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="user-posts?user-id=${posts[0].getUser().getId()}&page=${p}">${p}</a>
-                    </c:otherwise>
-                </c:choose>
+            <c:if test="${fn:length(pages) > 1}">
+                <c:forEach var="p" items="${pages}">
+                    <c:choose>
+                        <c:when test="${page == null && p == 1}">
+                            <a class="current-page" href="user-posts?user-id=${posts[0].getUser().getId()}&page=${p}">${p}</a>
+                        </c:when>
+                        <c:when test="${page == p}">
+                            <a class="current-page" href="user-posts?user-id=${posts[0].getUser().getId()}&page=${p}">${p}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="user-posts?user-id=${posts[0].getUser().getId()}&page=${p}">${p}</a>
+                        </c:otherwise>
+                    </c:choose>
 
-            </c:forEach>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
 

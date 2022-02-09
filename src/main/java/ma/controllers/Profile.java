@@ -15,11 +15,12 @@ public class Profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        User user = new User();
+        User user;
         if(request.getSession().getAttribute("user") != null){
             int userID = (int) request.getSession().getAttribute("user");
             user = UserDB.getUser("select * from User where id = " + userID);
             request.setAttribute("userObj", user);
+            
             request.getRequestDispatcher("profile.jsp").forward(request, response);
         } else{
             response.sendRedirect("login.jsp");

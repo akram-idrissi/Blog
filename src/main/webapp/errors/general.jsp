@@ -57,19 +57,14 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="side-bar">
-            <div class="padding">
-                <h2>Our Sidebar</h2>
-                <p>You can put any information you'd like here.</p>
-
-                <ul>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Private chat</a></li>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Join chat room</a></li>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Notifications</a></li>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Others</a></li>
-                </ul>
-
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <h1>Error</h1>
             </div>
+            <h2>Things are a little unstable here. I suggest come back later</h2>
         </div>
     </div>
+    
+
+<jsp:include page="../includes/endHtml.jsp" /> 

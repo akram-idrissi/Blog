@@ -9,7 +9,9 @@
                         <span class="post-hidden-id" style="display: none">${post.getId()}</span>
                         <img src="images/${post.getUser().getImage()}" alt="profile image">
                         <div class="post-desc">
-                            <span class="username"><a href="user-posts?user-id=${post.getUser().getId()}">${post.getUser().getUsername()}</a></span> 
+                            <span class="username">
+                                <a style="color: #007bff" href="user-posts?user-id=${post.getUser().getId()}">${post.getUser().getUsername()}</a>
+                            </span> 
                             <fmt:parseDate value="${post.getPostedDate()}" type="date" pattern="yyyy-MM-dd HH:mm:ss" var="fdate" />
                             <fmt:formatDate value="${fdate}" type="date" pattern="MMM dd, yyyy" var="string"/>
                             <span class="post-date">${string}</span>
