@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>blog app</display-name>
-    
     <!-- Servlet -->
     <servlet>
         <servlet-name>Login</servlet-name>
@@ -75,6 +74,14 @@
     <servlet>
         <servlet-name>UserPosts</servlet-name>
         <servlet-class>ma.controllers.UserPosts</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>ma.controllers.Users</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PrivateChat</servlet-name>
+        <servlet-class>ma.controllers.PrivateChat</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -156,6 +163,14 @@
         <location>/errors/general.jsp</location>
     </error-page>
     <!-- welcome files -->
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrivateChat</servlet-name>
+        <url-pattern>/private-chat</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>

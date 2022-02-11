@@ -64,10 +64,10 @@
                 <p>You can put any information you'd like here.</p>
 
                 <ul>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Private chat</a></li>
+                    <li> <a  style="color: #a4a5a8" href="users">Private chat</a></li>
                     <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Join chat room</a></li>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Notifications</a></li>
-                    <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Others</a></li>
+                    <li> <a  style="color: #a4a5a8" href="#">Notifications</a></li>
+                    <li> <a  style="color: #a4a5a8" href="#">Others</a></li>
                 </ul>
 
             </div>

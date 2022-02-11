@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import ma.util.DBUtil;
 import ma.business.User;
@@ -135,6 +136,41 @@ public class UserDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
+    }
+    
+    public static ArrayList<User> getAll(String query){
+        
+        ArrayList<User> users = new ArrayList();
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultset = null;
+
+        try {
+            ps = connection.prepareStatement(query);
+            resultset = ps.executeQuery();
+            while(resultset.next()){
+                users.add(new User(
+                    resultset.getInt("id"),
+                    resultset.getString("username"),
+                    resultset.getString("email"),
+                    resultset.getString("hashedpass"),
+                    resultset.getString("salt"),
+                    resultset.getString("register_date"),
+                    resultset.getInt("valide"),
+                    resultset.getString("image")
+                ));
+                
+            }
+            return users;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            DBUtil.closeResultSet(resultset);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return users;
     }
     
 }

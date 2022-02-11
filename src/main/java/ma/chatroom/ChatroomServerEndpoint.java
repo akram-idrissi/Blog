@@ -1,7 +1,9 @@
 
 package ma.chatroom;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.io.IOException;
@@ -12,12 +14,10 @@ import javax.websocket.OnOpen;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.Session;
-import javax.websocket.OnMessage;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.websocket.OnMessage;
+import java.text.SimpleDateFormat;
 import javax.websocket.EndpointConfig;
 import javax.websocket.server.ServerEndpoint;
 
