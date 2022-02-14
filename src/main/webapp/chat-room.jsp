@@ -31,8 +31,6 @@
     <main class="content">
         <div class="chat-container p-0">
     
-            <h2 class="h3 mt-3">Our chat Room</h2>
-    
             <div class="card">
                 <div class="row g-0">
                     <div class="col-12 col-lg-5 col-xl-3 border-right">
@@ -55,7 +53,7 @@
                         </div>
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="input-group">
-                                <input type="text" id="form-control" placeholder="Type your message">
+                                <input type="text" id="form-control" placeholder="Type your message" required="required" >
                                 <button id="btn-send" onclick="send()" class="btn btn-primary">Send</button>
                             </div>
                         </div>

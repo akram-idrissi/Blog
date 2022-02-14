@@ -304,6 +304,10 @@ textArea:focus{
     background-color: #fcfcfc;
     border: 0.5px solid #f1f1f1;
 }
+
+.sidebar-links{
+    display: none;
+}
 /* end side bar */
 
 
@@ -956,6 +960,10 @@ textArea:focus{
     .side-bar{
         display: none;
     }
+    
+    .sidebar-links{
+        display: block;
+    }
 
     #links{
         background-color: #556e80;
@@ -1135,6 +1143,15 @@ textArea:focus{
     border-radius: 0;
 }
 
+.input-group{
+    padding: 12px;
+    text-align: center;
+}
+
+.pple{
+    border-bottom: 1px solid #dee2e6!important;
+}
+
 #notfound {
     position: relative;
     height: 70vh;
@@ -1187,4 +1204,17 @@ textArea:focus{
     font-weight: 500;
     text-transform: uppercase;
     margin-top: 15px;
+}
+
+.notif{
+    right: 15px;
+    width: 20px;
+    color: #fff;
+    float: right;
+    height: 20px;
+    display: none;
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    background-color: #f00;
 }

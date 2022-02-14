@@ -75,7 +75,16 @@ public class ChatroomServerEndpoint {
     
     @OnClose
     public void onClose(Session session){
+        users.remove((String) session.getUserProperties().get("userID"));
         chatroomUsers.remove(session);
+        Iterator<Session> iterator = chatroomUsers.iterator();
+        while (iterator.hasNext()) {
+            try {
+                iterator.next().getBasicRemote().sendText(buildJsonData(users, items));
+            } catch (IOException ex) {
+                Logger.getLogger(ChatroomServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     @OnError

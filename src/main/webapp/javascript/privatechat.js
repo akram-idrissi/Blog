@@ -1,22 +1,31 @@
+let count = 0;
 var userID = document.getElementById("hidden-user").value;
-var recID = document.getElementById("hidden-receiver").value;
 var socket = new WebSocket("ws://localhost:8090/blog/chat.jsp"); 
-    
+  
 
-socket.onopen = function(response){
+socket.onopen = function (response) {
+//    document.getElementById("p-4").value = "";
+//    document.getElementById("col-lg-6").value = "";
     console.log("connection established");
+
 };
 
 socket.onerror = function(response){
     console.log("ERROR");
 };
 
-socket.onmessage = function(response){
+socket.onmessage = function (response) {
     var json = JSON.parse(response.data);
     console.log(json);
     
-    addReceiver(json.receiver);
-    messageList(json.messages);
+    if(json.messages !== undefined)
+        messageList(json.messages);
+
+    if(json.users !== undefined)
+        peopleList(json.users);
+
+    if(json.receiver !== undefined)
+        addReceiver(json.receiver);
 };
 
 socket.onclose = function(response) {
@@ -24,46 +33,75 @@ socket.onclose = function(response) {
 };
 
 function send() {
-//    let now = new Date();
-//    var time = moment(now).format('HH:MM');
+    var id = document.getElementById("receiver-id");
     var message = document.getElementById("form-control");
-    
-    var json = JSON.stringify({
-                "senderID":userID,
-                "receiverID":recID,
-                "msg":message.value
-            });
-    
+    if( id !== null){
+        var json = JSON.stringify({
+                    "msg":message.value,
+                    "senderID":userID,
+                    "receiverID":id.value 
+                });
+
+        socket.send(json);
+        message.value = "";
+    }
+}
+
+function sendReceiver(id) {
+    var json = JSON.stringify({"receiverID":id});
     socket.send(json);
-    message.value = "";
 }
 
 function addReceiver(receiver){
-    var receiverContainer = document.getElementById("col-lg-6");
+    var body = document.getElementsByTagName("body")[0];
+    body.innerHTML += `<input id="receiver-id" type="hidden" value="${receiver["id"]}" >`;
+    var receiverContainer = document.getElementById("d-flex");
     receiverContainer.innerHTML = "";
     var person = 
-            `<a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                <img src="images/${receiver["image"]}" alt="avatar">
-            </a>
-            <div class="chat-about">
-                <h6 class="m-b-0">${receiver["username"]}</h6>
-                <small>Last seen: 2 hours ago</small>
-            </div>`;
+            `
+            <div id="col-lg-6">
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                    <input id="container-receiver-id" type="hidden" value="${receiver["id"]}" >
+                    <img src="images/${receiver["image"]}" alt="avatar">
+                </a>
+                <div class="chat-about">
+                    <h6 class="m-b-0">${receiver["username"]}</h6>
+                    <small>Last seen: 2 hours ago</small>
+                </div>
+            </div>
+`;
 
     receiverContainer.innerHTML += person;
 };
 
 function messageList(items){
+    
     var message;
     var messageContainer = document.getElementById("p-4");
+    var receiverID = document.getElementById("receiver-id");
+    var receiverContainer = document.getElementById("container-receiver-id");
+    messageContainer.innerHTML = "";
+    
+//    if(receiverContainer === undefined || receiverContainer === null || receiverID === undefined || receiverID === null){
+//        var notif = document.getElementById("notif-count");
+//        if(notif !== null){
+//            notif.innerHTML = count++;
+//        } else if(count > 0){
+//            notif.innerHTML = count++;
+//            document.querySelector(".notif").style.display = 'block';
+//        }
+//        
+//    } 
+    
     for(var item in items){
-        var msg = items[item]["msg"];
-        var sender = items[item]["senderId"];
-        var time = items[item]["messageDate"];
-        
+        var sender = items[item][0];
+        var receiver = items[item][1];
+        var msg = items[item][2];
+        var time = items[item][3];
+
         if(userID == sender["id"]){
             message = `
-                    <div class="chat-message-right pb-4">
+                    <div class="chat-message-right pb-4">    
                         <div>
                             <img src="images/${sender["image"]}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                             <div class="text-muted small text-nowrap mt-2">${time}</div>
@@ -91,3 +129,32 @@ function messageList(items){
         messageContainer.innerHTML += message;
     }; 
 };
+
+
+function peopleList(users){
+    var peopleContainer = document.getElementById("people-list");
+    peopleContainer.innerHTML = "";
+
+    for (let u in users) {
+        var id = u;
+        var user = users[u];
+
+        if (id != userID) {
+            var person =
+                    `<a onclick="sendReceiver(${id})" href="#" class="list-group-item list-group-item-action border-0">
+                        <div class="d-flex align-items-start">
+                            <img src="images/${user["image"]}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                            <div class="flex-grow-1 ml-3">
+                                ${user["username"]}
+                                <div class="notif">
+                                    <p id="notif-count">${count}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>`;
+
+            peopleContainer.innerHTML += person;
+        }
+    }
+}
+

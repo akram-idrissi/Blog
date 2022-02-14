@@ -13,9 +13,7 @@ public class PrivateChatServerConfigurator extends ServerEndpointConfig.Configur
     public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
         HttpSession session = (HttpSession) request.getHttpSession();
         int userId = (int) session.getAttribute("user");
-        int recId = (int) session.getAttribute("receiver");
         sec.getUserProperties().put("userID", userId + "");
-        sec.getUserProperties().put("recID", recId + "");
     }
     
 }
