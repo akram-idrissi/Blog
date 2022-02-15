@@ -22,6 +22,13 @@ public class Data {
         this.users = users;
     }
     
+    public Data(User receiver, ArrayList<Object[]> messages) {
+        this.receiver = receiver;
+        this.messages = messages;
+    }
+    
+    
+    
     public Data(Map<Integer, User> users, ArrayList<Object[]> messages) {
         this.users = users;
         this.messages = messages;

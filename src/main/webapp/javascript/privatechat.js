@@ -6,6 +6,12 @@ var socket = new WebSocket("ws://localhost:8090/blog/chat.jsp");
 socket.onopen = function (response) {
 //    document.getElementById("p-4").value = "";
 //    document.getElementById("col-lg-6").value = "";
+//    var id = document.getElementById("receiver-id");
+//    console.log(id);
+//    if(id != null || id != undefined){
+//        sendReceiver(id.value);
+//        console.log("send id ");
+//    }
     console.log("connection established");
 
 };
@@ -48,11 +54,13 @@ function send() {
 }
 
 function sendReceiver(id) {
-    var json = JSON.stringify({"receiverID":id});
+    var json = JSON.stringify({"senderID":userID, "receiverID":id});
     socket.send(json);
 }
 
 function addReceiver(receiver){
+    var messageContainer = document.getElementById("p-4");
+    messageContainer.innerHTML = "";
     var body = document.getElementsByTagName("body")[0];
     body.innerHTML += `<input id="receiver-id" type="hidden" value="${receiver["id"]}" >`;
     var receiverContainer = document.getElementById("d-flex");
@@ -98,35 +106,41 @@ function messageList(items){
         var receiver = items[item][1];
         var msg = items[item][2];
         var time = items[item][3];
+        
+        if(receiverContainer !== null){
+        
+            if((sender["id"] == userID && receiver["id"] == receiverContainer.value) || (sender["id"] == receiverContainer.value && receiver["id"] == userID) ){
 
-        if(userID == sender["id"]){
-            message = `
-                    <div class="chat-message-right pb-4">    
-                        <div>
-                            <img src="images/${sender["image"]}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                            <div class="text-muted small text-nowrap mt-2">${time}</div>
-                        </div>
-                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                            <div class="font-weight-bold mb-1">You</div>
-                            ${msg}
-                        </div>
-                    </div>`;
+                if(userID == sender["id"]){
+                    message = `
+                            <div class="chat-message-right pb-4">    
+                                <div>
+                                    <img src="images/${sender["image"]}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                    <div class="text-muted small text-nowrap mt-2">${time}</div>
+                                </div>
+                                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                    <div class="font-weight-bold mb-1">You</div>
+                                    ${msg}
+                                </div>
+                            </div>`;
 
-        } else{
-            message = 
-                    `
-                    <div class="chat-message-left pb-4">
-                        <div>
-                            <img src="images/${sender["image"]}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                            <div class="text-muted small text-nowrap mt-2">${time}</div>
-                        </div>
-                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                            <div class="font-weight-bold mb-1">${sender["username"]}</div>
-                            ${msg}
-                        </div>
-                    </div>`;
-        };
-        messageContainer.innerHTML += message;
+                } else{
+                    message = 
+                            `
+                            <div class="chat-message-left pb-4">
+                                <div>
+                                    <img src="images/${sender["image"]}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                    <div class="text-muted small text-nowrap mt-2">${time}</div>
+                                </div>
+                                <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                    <div class="font-weight-bold mb-1">${sender["username"]}</div>
+                                    ${msg}
+                                </div>
+                            </div>`;
+                };
+                messageContainer.innerHTML += message;
+            }
+        }
     }; 
 };
 

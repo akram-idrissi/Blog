@@ -37,10 +37,11 @@ public class PrivateChatServerEndpoint {
     static Map<Integer, User> users = new HashMap<>();
     static ArrayList<Object[]> messages = new ArrayList<>();
     static Map<String, Session> onlineUsers = new HashMap<>();
+    static Map<String, String> senderReceiver = new HashMap<>();
     static Set<Session> sessions = Collections.synchronizedSet(new HashSet<>());  
     
     @OnOpen
-    public void onOpen(Session session, EndpointConfig conf) {
+    public void onOpen(Session session, EndpointConfig conf) { 
         // getting the id of the current user from the session using a configurator
         String userID = (String) conf.getUserProperties().get("userID");
         User user = UserDB.getUser("select * from user where id = " + userID);
@@ -49,12 +50,33 @@ public class PrivateChatServerEndpoint {
         users.put(user.getId(), user);
         sessions.add(session);
         
-        // sends list of online users to all connected users
+        String receiverID = senderReceiver.get(userID);
+        Session s = onlineUsers.get(userID);
         
+        // receiver container
+        if(s != null){
+            try {
+                s.getBasicRemote().sendText(toJson(UserDB.getUser("select * from user where id = " + receiverID)));
+            } catch (IOException ex) {
+                Logger.getLogger(PrivateChatServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        if(receiverID != null){
+            User receiver = UserDB.getUser("select * from user where id = " + receiverID);
+            try {
+                session.getBasicRemote().sendText(toJson(receiver)); 
+            } catch (IOException ex) {
+                Logger.getLogger(PrivateChatServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        // sends list of online users to all connected users
         Iterator<Session> iterator = sessions.iterator();
         while(iterator.hasNext()){
             try {
-                iterator.next().getBasicRemote().sendText(toJson(users)); 
+                iterator.next().getBasicRemote().sendText(toJson(users, messages)); 
             } catch (IOException ex) {
                 Logger.getLogger(PrivateChatServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -73,7 +95,8 @@ public class PrivateChatServerEndpoint {
         // when the current user clicks on an online user
         if(data.getMsg() == null){
             try {
-                session.getBasicRemote().sendText(toJson(receiver));
+                senderReceiver.put(senderID, receiverID);
+                session.getBasicRemote().sendText(toJson(receiver, messages));
             } catch (IOException ex) {
                 Logger.getLogger(PrivateChatServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -137,6 +160,11 @@ public class PrivateChatServerEndpoint {
     
     public String toJson(Map<Integer, User> users, ArrayList<Object[]> messages){
         Data data = new Data(users, messages);
+        return new Gson().toJson(data);
+    } 
+    
+    public String toJson(User user, ArrayList<Object[]> messages){
+        Data data = new Data(user, messages);
         return new Gson().toJson(data);
     } 
             
