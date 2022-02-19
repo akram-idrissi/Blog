@@ -49,14 +49,14 @@ public class PrivateChatServerEndpoint {
         onlineUsers.put(userID, session);
         users.put(user.getId(), user);
         sessions.add(session);
-        
+
         String receiverID = senderReceiver.get(userID);
         Session s = onlineUsers.get(userID);
         
         // receiver container
         if(s != null){
             try {
-                s.getBasicRemote().sendText(toJson(UserDB.getUser("select * from user where id = " + receiverID)));
+                s.getBasicRemote().sendText(toJson(UserDB.getUser("select * from user where id = " + receiverID), messages));
             } catch (IOException ex) {
                 Logger.getLogger(PrivateChatServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -100,12 +100,12 @@ public class PrivateChatServerEndpoint {
             } catch (IOException ex) {
                 Logger.getLogger(PrivateChatServerEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         // when the current user send a message  
         } else{
             Date date = new Date(); 
             String time = new SimpleDateFormat("HH:mm").format(date);
-            
+
             if (s != null) {
                 messages.add(new Object[]{sender, receiver, data.getMsg(), time});
                 try {
@@ -122,6 +122,7 @@ public class PrivateChatServerEndpoint {
     public void onClose(Session session){
         String id = (String) session.getUserProperties().get("userID");
         users.remove((Integer.parseInt(id)));
+        senderReceiver.remove(id);
         sessions.remove(session);
         onlineUsers.remove(id);
         
@@ -167,9 +168,10 @@ public class PrivateChatServerEndpoint {
         Data data = new Data(user, messages);
         return new Gson().toJson(data);
     } 
-            
 }
 
+
+/* first commmented snippet */
 
 //static ArrayList<Message> messages;
 //static Set<Session> chatUsers = Collections.synchronizedSet(new HashSet<>());    

@@ -11,10 +11,17 @@ import ma.business.Message;
 
 public class Data { 
     
+    private String notification;
     private Map<Integer, User> users;
     private ArrayList<Object[]> messages;
     private User sender, receiver, toReceiver;
     private String time, msg, senderID, receiverID;
+    
+    /*
+    * 
+    * constructors
+    * 
+    */
     
     public Data() {}
     
@@ -26,8 +33,6 @@ public class Data {
         this.receiver = receiver;
         this.messages = messages;
     }
-    
-    
     
     public Data(Map<Integer, User> users, ArrayList<Object[]> messages) {
         this.users = users;
@@ -46,6 +51,21 @@ public class Data {
     
     public Data(User receiver) {
         this.receiver = receiver;
+    }
+    
+    
+    /*
+    * getters
+    * and 
+    * setters
+    */
+    
+    public String getNotification() {
+        return notification;
+    }
+
+    public void setNotification(String notification) {
+        this.notification = notification;
     }
     
     public Map<Integer, User> getUsers() {

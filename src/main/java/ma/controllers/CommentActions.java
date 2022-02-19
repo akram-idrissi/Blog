@@ -62,7 +62,7 @@ public class CommentActions extends HttpServlet {
         comment.setLikeCount(0);
         comment.setDislikeCount(0);
         comment.setContent(content);
-        
+
         CommentDB.insert(comment);
         post.setCommentCount(post.getCommentCount() + 1);
         PostDB.update(post);

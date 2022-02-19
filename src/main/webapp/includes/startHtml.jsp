@@ -31,10 +31,8 @@
                         <a href="register.jsp">Register</a>
                     </div>
                     <div class="sidebar-links no-user">
-                        <a  style="color: #a4a5a8" href="login.jsp">Private chat</a>
+                        <!--<a  style="color: #a4a5a8" href="login.jsp">Private chat</a>-->
                         <a  style="color: #a4a5a8" href="login.jsp">Join chat room</a>
-                        <a  style="color: #a4a5a8" href="login.jsp">others</a>
-                        <a  style="color: #a4a5a8" href="login.jsp">Others</a>
                     </div>
                 </div>
                 </c:when>    
@@ -52,10 +50,8 @@
                     </div>
                     
                     <div class="sidebar-links user">
-                        <a  style="color: #a4a5a8" href="chat.jsp">Private chat</a>
+                        <!--<a  style="color: #a4a5a8" href="chat.jsp">Private chat</a>-->
                         <a  style="color: #a4a5a8" href="chat-room.jsp">Join chat room</a>
-                        <a  style="color: #a4a5a8" href="javascipt:void(0);">others</a>
-                        <a  style="color: #a4a5a8" href="javascipt:void(0);">Others</a>
                     </div>
                 </div>
                 </c:otherwise>
@@ -78,18 +74,14 @@
                 <c:choose>
                     <c:when test="${user == null}">
                     <ul>
-                        <li> <a  style="color: #a4a5a8" href="login.jsp">Private chat</a></li>
+                        <!--<li> <a  style="color: #a4a5a8" href="login.jsp">Private chat</a></li>-->
                         <li> <a  style="color: #a4a5a8" href="login.jsp">Join chat room</a></li>
-                        <li> <a  style="color: #a4a5a8" href="login.jsp">others</a></li>
-                        <li> <a  style="color: #a4a5a8" href="login.jsp">Others</a></li>
                     </ul>
                     </c:when>
                     <c:otherwise>
                         <ul>
-                            <li> <a  style="color: #a4a5a8" href="chat.jsp">Private chat</a></li>
+                            <!--<li> <a  style="color: #a4a5a8" href="chat.jsp">Private chat</a></li>-->
                             <li> <a  style="color: #a4a5a8" href="chat-room.jsp">Join chat room</a></li>
-                            <li> <a  style="color: #a4a5a8" href="javascipt:void(0);">others</a></li>
-                            <li> <a  style="color: #a4a5a8" href="javascipt:void(0);">Others</a></li>
                         </ul>
                     </c:otherwise>
                 </c:choose>

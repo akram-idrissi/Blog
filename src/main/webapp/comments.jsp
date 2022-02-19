@@ -21,7 +21,7 @@
                             <a>
                                 <h2>${post.getTitle()}</h2>
                             </a>
-                            <p class="content">${post.getContent()}</p>
+                                <p class="content"> <c:out value="${post.getContent()}" /> </p>
                             <span onclick="readMore(this)" class="read-more-btn">Read More</span>
 
                             <div class="insights">
@@ -75,7 +75,7 @@
 
                         <hr class="break-line">
                         <p class="content" class="comment-text">
-                            ${comment.getContent()}
+                            <c:out value="${comment.getContent()}" />
                         </p>
                         <span onclick="readMore(this)" class="read-more-btn">Read More</span>
                     </div>

@@ -1136,11 +1136,13 @@ textArea:focus{
 }
 
 #p-4{
+    height: 200px;
     padding: 1.5rem 1.5rem 0 1.5rem!important;
 }
 
 #btn-send{
     border-radius: 0;
+    
 }
 
 .input-group{
@@ -1149,7 +1151,12 @@ textArea:focus{
 }
 
 .pple{
+    padding-bottom: 25px;
     border-bottom: 1px solid #dee2e6!important;
+}
+
+.pple h2{
+    transform: translateY(10px);
 }
 
 #notfound {
@@ -1218,3 +1225,7 @@ textArea:focus{
     text-align: center;
     background-color: #f00;
 }
+
+#list-group-item{
+    border: none;
+} 
