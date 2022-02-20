@@ -9,15 +9,15 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 
 import ma.util.DBUtil;
-import ma.util.ConnectionPool;
-import ma.business.Verifyemail;
+import ma.util.MySQLConnectionPool;
+import ma.business.EmailTrac;
 
 
 public class VerifyEmailDB {
     
-    public static long insert(Verifyemail ve){
+    public static long insert(EmailTrac ve){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into verifyemail (email, code, flag) values(?, ?, ?)";
@@ -41,9 +41,9 @@ public class VerifyEmailDB {
         
     }
     
-    public static long update(Verifyemail ve){
+    public static long update(EmailTrac ve){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update verifyemail set code = ?,"
@@ -68,9 +68,9 @@ public class VerifyEmailDB {
         
     }
     
-    public static long delete(Verifyemail ve){
+    public static long delete(EmailTrac ve){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from verifyemail where email = ?";
@@ -91,8 +91,8 @@ public class VerifyEmailDB {
         
     }
     
-    public static Verifyemail getVerifyEmail(String query){
-        ConnectionPool pool = ConnectionPool.getInstance();
+    public static EmailTrac getVerifyEmail(String query){
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -101,7 +101,7 @@ public class VerifyEmailDB {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             rs.next();
-            return new Verifyemail(
+            return new EmailTrac(
                     rs.getString("email"),
                     rs.getString("code"),
                     rs.getInt("flag"),

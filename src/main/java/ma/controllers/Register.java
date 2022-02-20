@@ -14,7 +14,7 @@ import ma.constants.Methods;
 import ma.util.PasswordUtil;
 import ma.util.MailUtilGmail;
 import ma.data.VerifyEmailDB;
-import ma.business.Verifyemail;
+import ma.business.EmailTrac;
 
 import static ma.constants.Page.*;
 import static ma.constants.InfoMSG.*;
@@ -94,7 +94,7 @@ public class Register extends HttpServlet {
             MailUtilGmail.sendMail(email, subject, body, false);
 
             User user = new User();
-            Verifyemail ve = new Verifyemail();
+            EmailTrac ve = new EmailTrac();
             
             ve.setFlag(0); // The user has not verify its email yet
             ve.setCode(code);

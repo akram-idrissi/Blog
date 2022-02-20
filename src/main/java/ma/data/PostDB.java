@@ -11,14 +11,14 @@ import java.sql.PreparedStatement;
 
 import ma.util.DBUtil;
 import ma.business.Post;
-import ma.util.ConnectionPool;
-
+import ma.util.MySQLConnectionPool;
+ 
 
 public class PostDB {
 
     public static long insert(Post post){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into post "
@@ -48,7 +48,7 @@ public class PostDB {
     
     public static long update(Post post){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update post set title = ?,"
@@ -81,7 +81,7 @@ public class PostDB {
     
     public static long delete(Post post){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from post where id = ?";
@@ -104,7 +104,7 @@ public class PostDB {
     
     public static Post getPost(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet resultset = null;
         PreparedStatement ps = null;
@@ -142,7 +142,7 @@ public class PostDB {
     public static ArrayList<Post> getAll(String query){
         
         ArrayList<Post> posts = new ArrayList();
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet resultset = null;
@@ -177,7 +177,7 @@ public class PostDB {
     
     public static long size(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

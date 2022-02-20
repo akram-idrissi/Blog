@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 
 import ma.util.DBUtil;
 import ma.business.Message;
-import ma.util.ConnectionPool;
+import ma.util.MySQLConnectionPool;
 
 
 public class MessageDB {
@@ -20,7 +20,7 @@ public class MessageDB {
     
     public static long insert(Message msg){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into message (sender_id, receiver_id, msg) values(?, ?, ?)";
@@ -44,7 +44,7 @@ public class MessageDB {
     
     public static long delete(Message msg){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from message where id = ?";
@@ -64,7 +64,7 @@ public class MessageDB {
     }
     
     public static Message getMessage(String query){
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -96,7 +96,7 @@ public class MessageDB {
     public static ArrayList<Message> getAll(String query){
         
         ArrayList<Message> users = new ArrayList();
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet resultset = null;

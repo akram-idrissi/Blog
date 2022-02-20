@@ -12,7 +12,7 @@ import ma.data.UserDB;
 import ma.business.User;
 import ma.business.Post;
 import ma.data.PostInsightDB;
-import ma.business.Postinsight;
+import ma.business.PostIsg;
 
 
 public class PostInsights extends HttpServlet {
@@ -39,7 +39,7 @@ public class PostInsights extends HttpServlet {
             
             // query for postInsight of the post that has been dis/liked
             String insightQuery = String.format("select * from postinsight where user_id = %d and post_id = %d order by id desc", userID, post.getId());
-            Postinsight postI = PostInsightDB.getPostInsight(insightQuery);
+            PostIsg postI = PostInsightDB.getPostInsight(insightQuery);
             
             int likeCount = post.getLikeCount();
             int dislikeCount = post.getDislikeCount();
@@ -77,7 +77,7 @@ public class PostInsights extends HttpServlet {
                         
                     } else {
 
-                        postI = new Postinsight();
+                        postI = new PostIsg();
                         postI.setUser(user);
                         postI.setPost(post);
                         postI.setIsLike(1);
@@ -121,7 +121,7 @@ public class PostInsights extends HttpServlet {
                         }
                         
                     } else {
-                        postI = new Postinsight();
+                        postI = new PostIsg();
                         postI.setUser(user);
                         postI.setPost(post);
                         postI.setIsLike(0);

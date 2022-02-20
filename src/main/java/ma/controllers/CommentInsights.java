@@ -13,7 +13,7 @@ import ma.business.User;
 import ma.data.CommentDB;
 import ma.business.Comment;
 import ma.data.CommentInsightDB;
-import ma.business.Commentinsight;
+import ma.business.CommentIsg;
 
 
 public class CommentInsights extends HttpServlet {
@@ -39,7 +39,7 @@ public class CommentInsights extends HttpServlet {
             
             // query for commentInsight of the comment that has been dis/liked
             String insightQuery = String.format("select * from commentinsight where user_id = %d and comment_id = %d order by id desc", userID, comment.getId());
-            Commentinsight commentI = CommentInsightDB.getCommentIsg(insightQuery);
+            CommentIsg commentI = CommentInsightDB.getCommentIsg(insightQuery);
             
             int likeCount = comment.getLikeCount();
             int dislikeCount = comment.getDislikeCount();
@@ -76,7 +76,7 @@ public class CommentInsights extends HttpServlet {
                         
                     } else {
 
-                        commentI = new Commentinsight();
+                        commentI = new CommentIsg();
                         commentI.setIsLike(1);
                         commentI.setUser(user);
                         commentI.setIsDislike(0);
@@ -120,7 +120,7 @@ public class CommentInsights extends HttpServlet {
                         }
                         
                     } else {
-                        commentI = new Commentinsight();
+                        commentI = new CommentIsg();
                         commentI.setIsLike(0);
                         commentI.setUser(user);
                         commentI.setIsCommented(0);

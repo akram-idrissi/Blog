@@ -1,31 +1,21 @@
 package ma.business;
 
 
-public class Verifypassword  implements java.io.Serializable {
+public class EmailTrac  implements java.io.Serializable {
 
-    private Integer id;
     private String email;
     private String code;
     private Integer flag;
     private String date;
 
-    public Verifypassword() {
+    public EmailTrac() {
     }
 
-    public Verifypassword(Integer id, String email, String code, Integer flag, String date) {
-        this.id = id;
+    public EmailTrac(String email, String code, Integer flag, String date) {
         this.email = email;
         this.code = code;
         this.flag = flag;
         this.date = date;
-    }
-    
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -60,6 +50,7 @@ public class Verifypassword  implements java.io.Serializable {
         this.date = date;
     }
     
+
 }
 
 

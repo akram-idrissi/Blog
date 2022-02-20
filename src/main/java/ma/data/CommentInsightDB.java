@@ -10,15 +10,15 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 
 import ma.util.DBUtil;
-import ma.util.ConnectionPool;
-import ma.business.Commentinsight;
+import ma.util.MySQLConnectionPool;
+import ma.business.CommentIsg;
 
 
 public class CommentInsightDB{
     
-    public static long insert(Commentinsight ci){
+    public static long insert(CommentIsg ci){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into commentinsight (user_id, post_id, comment_id, is_commented, is_like, is_dislike) values(?, ?, ?, ?, ?, ?)";
@@ -45,9 +45,9 @@ public class CommentInsightDB{
     }
     
     
-    public static long update(Commentinsight ci){
+    public static long update(CommentIsg ci){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update commentinsight set is_commented = ?,"
@@ -74,9 +74,9 @@ public class CommentInsightDB{
         
     }
     
-    public static long delete(Commentinsight ci){
+    public static long delete(CommentIsg ci){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from commentinsight where user_id = ? and post_id = ? and comment_id = ?";
@@ -99,9 +99,9 @@ public class CommentInsightDB{
         
     }
     
-    public static Commentinsight getCommentIsg(String query){
+    public static CommentIsg getCommentIsg(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs;
@@ -110,7 +110,7 @@ public class CommentInsightDB{
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             if(rs.next()){
-                return new Commentinsight(
+                return new CommentIsg(
                         rs.getInt(1),
                         UserDB.getUser("select * from user where id = " + rs.getInt(2)),
                         PostDB.getPost("select * from post where id = " + rs.getInt(3)),
@@ -134,21 +134,19 @@ public class CommentInsightDB{
         }
     }
     
-    public static ArrayList<Commentinsight> getAll(String query){
+    public static ArrayList<CommentIsg> getAll(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        ArrayList<Commentinsight> all = new ArrayList<>();
+        ArrayList<CommentIsg> all = new ArrayList<>();
         ResultSet rs;
         
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             while(rs.next()){
-                all.add(
-                
-                    new Commentinsight(
+                all.add(new CommentIsg(
                     rs.getInt(1),
                     UserDB.getUser("select * from user where id = " + rs.getInt(2)),
                     PostDB.getPost("select * from post where id = " + rs.getInt(3)),

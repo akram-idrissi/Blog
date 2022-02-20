@@ -1,45 +1,39 @@
 package ma.business;
 
-public class Commentinsight  implements java.io.Serializable {
+public class PostIsg  implements java.io.Serializable {
 
     private Integer id;
     private User user;
     private Post post;
-    private Comment comment;
-    private Integer isCommented;
     private Integer isLike;
     private Integer isDislike;
-    private String commentInsDate;
-    
+    private String postInsDate;
 
-    public Commentinsight() {
+    public PostIsg() {
     }
 
-    public Commentinsight(Integer id, User user, Post post, Comment comment, Integer isCommented, Integer isLike, Integer isDislike, String commentInsDate) {
+	
+    public PostIsg(Post post, User user, String postInsDate) {
+        this.post = post;
+        this.user = user;
+        this.postInsDate = postInsDate;
+    }
+
+    public PostIsg(Integer id, User user, Post post, Integer isLike, Integer isDislike, String postInsDate) {
         this.id = id;
         this.user = user;
         this.post = post;
-        this.comment = comment;
-        this.isCommented = isCommented;
         this.isLike = isLike;
         this.isDislike = isDislike;
-        this.commentInsDate = commentInsDate;
+        this.postInsDate = postInsDate;
     }
-
+    
     public Integer getId() {
         return this.id;
     }
     
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Comment getComment() {
-        return this.comment;
-    }
-    
-    public void setComment(Comment comment) {
-        this.comment = comment;
     }
 
     public Post getPost() {
@@ -58,22 +52,6 @@ public class Commentinsight  implements java.io.Serializable {
         this.user = user;
     }
 
-    public Integer getIsCommented() {
-        return this.isCommented;
-    }
-    
-    public void setIsCommented(Integer isCommented) {
-        this.isCommented = isCommented;
-    }
-
-    public String getCommentInsDate() {
-        return this.commentInsDate;
-    }
-    
-    public void setCommentInsDate(String commentInsDate) {
-        this.commentInsDate = commentInsDate;
-    }
-
     public Integer getIsLike() {
         return this.isLike;
     }
@@ -88,6 +66,14 @@ public class Commentinsight  implements java.io.Serializable {
     
     public void setIsDislike(Integer isDislike) {
         this.isDislike = isDislike;
+    }
+
+    public String getPostInsDate() {
+        return this.postInsDate;
+    }
+    
+    public void setPostInsDate(String postInsDate) {
+        this.postInsDate = postInsDate;
     }
 
 

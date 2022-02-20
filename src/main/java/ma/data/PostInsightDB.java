@@ -9,15 +9,15 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 
 import ma.util.DBUtil;
-import ma.util.ConnectionPool;
-import ma.business.Postinsight;
+import ma.util.MySQLConnectionPool;
+import ma.business.PostIsg;
 
 
 public class PostInsightDB {
     
-    public static long insert(Postinsight pi){
+    public static long insert(PostIsg pi){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into postinsight (user_id, post_id, is_like, is_dislike) values(?, ?, ?, ?)";
@@ -40,9 +40,9 @@ public class PostInsightDB {
         }
     }
     
-    public static long update(Postinsight pi){
+    public static long update(PostIsg pi){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update postinsight set is_like = ?, is_dislike = ?";
@@ -63,9 +63,9 @@ public class PostInsightDB {
         }
     }
     
-    public static long delete(Postinsight pi){
+    public static long delete(PostIsg pi){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from postinsight where user_id = ? and post_id = ?";
@@ -86,9 +86,9 @@ public class PostInsightDB {
         }
     }    
     
-    public static Postinsight getPostInsight(String query){
+    public static PostIsg getPostInsight(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet resultset = null;
         PreparedStatement ps = null;
@@ -97,7 +97,7 @@ public class PostInsightDB {
             ps = connection.prepareStatement(query);
             resultset = ps.executeQuery();
             if(resultset.next()){
-                return new Postinsight(
+                return new PostIsg(
                     resultset.getInt("id"),
                     UserDB.getUser("select * from user where id = " + resultset.getInt("user_id")),
                     PostDB.getPost("select * from post where id = " + resultset.getInt("post_id")), 

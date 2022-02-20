@@ -11,14 +11,14 @@ import java.util.ArrayList;
 
 import ma.util.DBUtil;
 import ma.business.User;
-import ma.util.ConnectionPool;
+import ma.util.MySQLConnectionPool;
 
 
 public class UserDB {
 
     public static long insert(User user){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into user (username, email, hashedpass, salt, valide, image)"
@@ -48,7 +48,7 @@ public class UserDB {
     
     public static long update(User user){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update user set username = ?,"
@@ -84,7 +84,7 @@ public class UserDB {
     
     public static long delete(User user){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from user where id = ?";
@@ -106,7 +106,7 @@ public class UserDB {
     } 
     
     public static User getUser(String query){
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -141,7 +141,7 @@ public class UserDB {
     public static ArrayList<User> getAll(String query){
         
         ArrayList<User> users = new ArrayList();
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet resultset = null;

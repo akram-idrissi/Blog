@@ -4,19 +4,19 @@ import java.sql.*;
 import javax.sql.DataSource;
 import javax.naming.*;
 
-public class ConnectionPool {
+public class MySQLConnectionPool {
 
-    private static ConnectionPool pool = null;
+    private static MySQLConnectionPool pool = null;
     private static DataSource dataSource = null;
 
-    public synchronized static ConnectionPool getInstance() {
+    public synchronized static MySQLConnectionPool getInstance() {
         if (pool == null) {
-            pool = new ConnectionPool();
+            pool = new MySQLConnectionPool();
         }
         return pool;
     }
 
-    private ConnectionPool() {
+    private MySQLConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
             dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/blog");

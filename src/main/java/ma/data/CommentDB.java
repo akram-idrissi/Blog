@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 import ma.util.DBUtil;
 import ma.business.Comment;
-import ma.util.ConnectionPool;
+import ma.util.MySQLConnectionPool;
 
 public class CommentDB {
     
     public static long insert(Comment cmt){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into comment (user_id, post_id, content, like_count, dislike_count) values(?, ?, ?, ?, ?)";
@@ -45,7 +45,7 @@ public class CommentDB {
     
     public static long update(Comment cmt){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update comment set content = ?,"
@@ -74,7 +74,7 @@ public class CommentDB {
     
     public static long delete(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
@@ -94,7 +94,7 @@ public class CommentDB {
     
     public static Comment getComment(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs;
@@ -129,7 +129,7 @@ public class CommentDB {
     
     public static ArrayList<Comment> getAll(String query){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ArrayList<Comment> comments = new ArrayList<>();
@@ -163,7 +163,5 @@ public class CommentDB {
         }
         
     }
-    
-    
     
 }

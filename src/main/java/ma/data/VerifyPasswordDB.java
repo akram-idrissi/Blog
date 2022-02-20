@@ -9,15 +9,15 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 
 import ma.util.DBUtil;
-import ma.util.ConnectionPool;
-import ma.business.Verifypassword;
+import ma.util.MySQLConnectionPool;
+import ma.business.PasswordTrac;
 
 
 public class VerifyPasswordDB {
     
-    public static long insert(Verifypassword vp){
+    public static long insert(PasswordTrac vp){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "insert into verifypassword (email, code, flag) values(?, ?, ?)";
@@ -41,9 +41,9 @@ public class VerifyPasswordDB {
         
     }
     
-    public static long update(Verifypassword vp){
+    public static long update(PasswordTrac vp){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "update verifypassword set code = ?,"
@@ -68,9 +68,9 @@ public class VerifyPasswordDB {
         
     }
     
-    public static long delete(Verifypassword vp){
+    public static long delete(PasswordTrac vp){
         
-        ConnectionPool pool = ConnectionPool.getInstance();
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "delete from verifypassword where email = ?";
@@ -91,8 +91,8 @@ public class VerifyPasswordDB {
         
     }
     
-    public static Verifypassword getVerifyPassword(String query){
-        ConnectionPool pool = ConnectionPool.getInstance();
+    public static PasswordTrac getVerifyPassword(String query){
+        MySQLConnectionPool pool = MySQLConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -101,7 +101,7 @@ public class VerifyPasswordDB {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             rs.next();
-            return new Verifypassword(
+            return new PasswordTrac(
                     rs.getInt("id"),
                     rs.getString("email"),
                     rs.getString("code"),

@@ -13,7 +13,7 @@ import ma.constants.Methods;
 import ma.util.PasswordUtil;
 import ma.util.MailUtilGmail;
 import ma.data.VerifyPasswordDB;
-import ma.business.Verifypassword;
+import ma.business.PasswordTrac;
 
 import static ma.constants.Page.*;
 import static ma.constants.InfoMSG.*;
@@ -50,7 +50,7 @@ public class Email extends HttpServlet {
         } 
         
         else{
-            Verifypassword vp = new Verifypassword();
+            PasswordTrac vp = new PasswordTrac();
             
             User user = UserDB.getUser(emailQuery);
             request.getSession().setAttribute("user-non-valid-id", user.getId());

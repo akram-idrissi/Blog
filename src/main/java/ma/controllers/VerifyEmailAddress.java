@@ -11,7 +11,7 @@ import ma.data.UserDB;
 import ma.business.User;
 import ma.constants.Methods;
 import ma.data.VerifyEmailDB;
-import ma.business.Verifyemail;
+import ma.business.EmailTrac;
 
 import static ma.constants.Page.*;
 import static ma.constants.InfoMSG.*;
@@ -37,7 +37,7 @@ public class VerifyEmailAddress extends HttpServlet {
             
         } else{
             User user = UserDB.getUser(emailQuery);
-            Verifyemail ve = (Verifyemail) VerifyEmailDB.getVerifyEmail(codeQuery);
+            EmailTrac ve = (EmailTrac) VerifyEmailDB.getVerifyEmail(codeQuery);
 
             // If user and code exist
             if(ve.getCode().compareTo(code) != 0){
