@@ -1,7 +1,7 @@
 package ma.business;
 
 
-public class PasswordTrac  implements java.io.Serializable {
+public class PasswordTrac extends PojoFactory implements java.io.Serializable {
 
     private Integer id;
     private String email;

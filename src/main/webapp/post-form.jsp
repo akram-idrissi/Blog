@@ -9,7 +9,7 @@
     <div class="container">
         <div class="new-post">
             <div class="padding">
-                <form id="new-post-form" action="post" method="post">
+                <form id="new-post-form" action="/post" method="post">
                     <h2>New Post</h2>
                     <hr>
                     <br> 

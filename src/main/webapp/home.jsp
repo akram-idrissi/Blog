@@ -19,9 +19,15 @@
                             <fmt:formatDate value="${fdate}" type="date" pattern="MMM dd, yyyy" var="string"/>
                             <span class="post-date">${string}</span>
                             <hr>
-                            <a href="post-detail?post-id=${post.getId()}">
-                                <h2 class="post-title">${post.getTitle()}</h2>
-                            </a>
+                            
+                            <form action="/post">
+                                <a href="javascript:void(0);">
+                                    <h2 class="post-title">${post.getTitle()}</h2>
+                                </a>
+                                <input type="hidden" id="delete-post-btn" name="detail" value="${post.getId()}">
+                            </form>
+                            
+                            
                             <p class="content">${post.getContent()}</p>
                             <span onclick="readMore(this)" class="read-more-btn">Read More</span>
 

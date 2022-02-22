@@ -1,6 +1,6 @@
 package ma.business;
 
-public class Message  implements java.io.Serializable {
+public class Message extends PojoFactory implements java.io.Serializable {
 
     private Integer id;
     private String msg;

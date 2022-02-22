@@ -17,8 +17,14 @@
                             <span class="post-date">${string}</span>
                             <c:if test="${user == post.getUser().getId()}">
                                 <br>
-                                <a href="post-update.jsp"><button type="submit" id="update-post-btn" name="action" value="update">Update</button></a>
-                                <a href="post-confirm-delete.jsp"><button type="submit" id="delete-post-btn" name="action" value="delete">Delete</button></a>
+                                <form action="/post">
+                                    <input type="submit" id="update-post-btn" name="action" value="update">
+                                    <input type="submit" id="delete-post-btn" name="action" value="delete">
+                                </form>
+                                
+                                
+<!--                                <a href="post-update.jsp"><button type="submit" id="update-post-btn" name="action" value="update">Update</button></a>
+                                <a href="post-confirm-delete.jsp"><button type="submit" id="delete-post-btn" name="action" value="delete">Delete</button></a>-->
                             </c:if>
                                 
                             <hr>

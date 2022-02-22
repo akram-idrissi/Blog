@@ -1,6 +1,6 @@
 package ma.business;
 
-public class PostIsg  implements java.io.Serializable {
+public class PostIsg extends PojoFactory implements java.io.Serializable {
 
     private Integer id;
     private User user;

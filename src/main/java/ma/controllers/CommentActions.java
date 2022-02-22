@@ -37,9 +37,7 @@ public class CommentActions extends HttpServlet {
                 case "add" -> {
                     addComment(request, user, post);
                 }
-                case "update" -> {
-                    updateComment(request);
-                }
+                
                 case "delete" -> {
                     deleteComment(request, post);
                 }
@@ -68,8 +66,6 @@ public class CommentActions extends HttpServlet {
         PostDB.update(post);
     }
 
-    private void updateComment(HttpServletRequest request) {
-    }
 
     private void deleteComment(HttpServletRequest request, Post post) {
         String id = request.getParameter("comment-id");

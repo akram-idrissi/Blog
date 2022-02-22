@@ -1,7 +1,7 @@
 package ma.business;
 
 
-public class Post  implements java.io.Serializable {
+public class Post extends PojoFactory implements java.io.Serializable {
 
     private User user;
     private Integer id;

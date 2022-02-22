@@ -1,6 +1,6 @@
 package ma.business;
 
-public class Comment  implements java.io.Serializable {
+public class Comment extends PojoFactory implements java.io.Serializable {
 
     private int id;
     private User user;

@@ -2,7 +2,7 @@
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>blog app</display-name>
     <!-- Servlet -->
-    <servlet>
+    <!--    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>ma.controllers.Login</servlet-class>
     </servlet>
@@ -70,7 +70,7 @@
         <servlet-name>CommentInter</servlet-name>
         <servlet-class>ma.controllers.CommentInter</servlet-class>
     </servlet>
-    <!-- Servlet Mapping -->
+     Servlet Mapping 
     <servlet>
         <servlet-name>UserPosts</servlet-name>
         <servlet-class>ma.controllers.UserPosts</servlet-class>
@@ -162,7 +162,7 @@
     <error-page>
         <location>/errors/general.jsp</location>
     </error-page>
-    <!-- welcome files -->
+     welcome files 
     <servlet-mapping>
         <servlet-name>Users</servlet-name>
         <url-pattern>/users</url-pattern>
@@ -170,6 +170,14 @@
     <servlet-mapping>
         <servlet-name>PrivateChat</servlet-name>
         <url-pattern>/private-chat</url-pattern>
+    </servlet-mapping>-->
+    <servlet>
+        <servlet-name>FrontController</servlet-name>
+        <servlet-class>ma.controller.FrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FrontController</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

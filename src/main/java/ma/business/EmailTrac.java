@@ -1,7 +1,7 @@
 package ma.business;
 
 
-public class EmailTrac  implements java.io.Serializable {
+public class EmailTrac extends PojoFactory implements java.io.Serializable {
 
     private String email;
     private String code;
